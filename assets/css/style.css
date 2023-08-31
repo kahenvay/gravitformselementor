@@ -1,0 +1,255 @@
+/* .gf_use_custom_checkbox{
+    color:red;
+} */
+
+.gf_use_custom_checkbox .gfield_consent_label:after{
+
+}
+
+
+
+/*Default styles for Gravity Forms gf_use_custom_checkbox class*/
+
+.consent_gf_use_custom_checkbox .ginput_container_consent input[type=checkbox]+label {
+    margin-left:19px;
+    font-weight: 400;
+    font-size: 15px;
+  }
+  
+  /*Custom subscribe box for consent_gf_use_custom_checkbox class*/
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"]{
+    position: absolute!important;
+    left: -9999px;
+  }
+  
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"] + label {
+    position: relative!important;
+    padding-left: 1.0em!important;
+    cursor: pointer!important;
+  }
+  
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"]+ label:before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border: 1px solid #000;
+    background: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+    padding: 2px;
+  }
+  
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"] + label:after{
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    /* transform: translateY(-50%) scale(1); */
+    left: -26px;
+    font-size: 19px;
+    line-height: 0.8;
+    background-color: #000;
+    transition: all .2s;
+  }
+  
+  /* checked mark aspect changes */
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: translateY(-50%) scale(0);
+  }
+  
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"]:checked + label:after {
+    opacity: 1;
+    /* transform: scale(1); */
+    transform: translateY(-50%) scale(1);
+  }
+  
+  /* disabled checkbox */
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"]:disabled + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+  }
+  
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+  }
+  
+  .consent_gf_use_custom_checkbox .ginput_container_consent [type="checkbox"]:disabled + label {
+    color: #aaa;
+  }
+
+  .consent_gf_use_custom_checkbox .ginput_container_consent input[type=checkbox]+label {
+    margin-left:19px;
+    font-weight: 400;
+    font-size: 15px;
+  }
+  
+  
+
+
+  /**/
+
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox input[type=checkbox]+label {
+    margin-left:19px;
+    font-weight: 400;
+    font-size: 15px;
+  }
+  
+  /*Custom subscribe box for checkbox_gf_use_custom_checkbox class*/
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"]{
+    position: absolute!important;
+    left: -9999px;
+  }
+  
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"] + label {
+    position: relative!important;
+    padding-left: 1.0em!important;
+    cursor: pointer!important;
+  }
+  
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"]+ label:before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border: 1px solid #000;
+    background: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+    padding: 2px;
+  }
+  
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"] + label:after{
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    /* transform: translateY(-50%) scale(1); */
+    left: -26px;
+    font-size: 19px;
+    line-height: 0.8;
+    background-color: #000;
+    transition: all .2s;
+  }
+  
+  /* checked mark aspect changes */
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: translateY(-50%) scale(0);
+  }
+  
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"]:checked + label:after {
+    opacity: 1;
+    /* transform: scale(1); */
+    transform: translateY(-50%) scale(1);
+  }
+  
+  /* disabled checkbox */
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"]:disabled + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+  }
+  
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+  }
+  
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox [type="checkbox"]:disabled + label {
+    color: #aaa;
+  }
+
+  .checkbox_gf_use_custom_checkbox .ginput_container_checkbox input[type=checkbox]+label {
+    margin-left:19px;
+    font-weight: 400;
+    font-size: 15px;
+  }
+  
+ /**/
+
+ .radio_gf_use_custom_radio .ginput_container_radio input[type=radio]+label {
+  margin-left:19px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+/*Custom subscribe box for radio_gf_use_custom_radio class*/
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"]{
+  position: absolute!important;
+  left: -9999px;
+}
+
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"] + label {
+  position: relative!important;
+  padding-left: 1.0em!important;
+  cursor: pointer!important;
+}
+
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"]+ label:before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: 1px solid #000;
+  background: #fff;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+  padding: 2px;
+}
+
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"] + label:after{
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 50%;
+  /* transform: translateY(-50%) scale(1); */
+  left: -26px;
+  font-size: 19px;
+  line-height: 0.8;
+  background-color: #000;
+  transition: all .2s;
+}
+
+/* checked mark aspect changes */
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: translateY(-50%) scale(0);
+}
+
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"]:checked + label:after {
+  opacity: 1;
+  /* transform: scale(1); */
+  transform: translateY(-50%) scale(1);
+}
+
+/* disabled radio */
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"]:disabled + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"]:disabled:checked + label:after {
+  color: #999;
+}
+
+.radio_gf_use_custom_radio .ginput_container_radio [type="radio"]:disabled + label {
+  color: #aaa;
+}
+
+.radio_gf_use_custom_radio .ginput_container_radio input[type=radio]+label {
+  margin-left:19px;
+  font-weight: 400;
+  font-size: 15px;
+}
