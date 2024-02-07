@@ -85,15 +85,15 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 8,
+					'top' => 0,
 					'right' => 0,
-					'bottom' => 16,
+					'bottom' => 0,
 					'left' => 0,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gform_title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .gform_title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
                 'condition' => [
                     'show_title' => 'yes',
@@ -128,7 +128,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gform_description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .gform_description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
                 'condition' => [
                     'show_description' => 'yes',
@@ -164,7 +164,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 ],
                 'separator' => 'before',
                 'selectors' => [
-                    '{{WRAPPER}} .gfield_label:not(.gfield_consent_label)' => 'display: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'display: {{VALUE}};',
                 ],
 			]
 		);
@@ -184,7 +184,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper  label:not(.gform-field-label--type-inline)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
                 'condition' => [
                     'label_display!' => 'none',
@@ -221,7 +221,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .ginput_container' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .ginput_container' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -233,15 +233,15 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 8,
+					'top' => 0,
 					'right' => 0,
-					'bottom' => 16,
+					'bottom' => 0,
 					'left' => 0,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -251,7 +251,8 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'input_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} input',
+				'selector' => '{{WRAPPER}} .gform_wrapper input',
+                'default' => 'solid'
 			]
 		);
 
@@ -270,7 +271,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -283,7 +284,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} input',
+                'selector' => '{{WRAPPER}} .gform_wrapper input',
 
             ]
         );
@@ -298,7 +299,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} input' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper input' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -312,7 +313,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} input' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper input' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -345,7 +346,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gtextarea_container' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .ginput_container_textarea' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -357,15 +358,15 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 8,
+					'top' => 0,
 					'right' => 0,
-					'bottom' => 16,
+					'bottom' => 0,
 					'left' => 0,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -375,7 +376,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'textarea_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} textarea',
+				'selector' => '{{WRAPPER}} .gform_wrapper textarea',
 			]
 		);
 
@@ -394,7 +395,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -407,7 +408,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} textarea',
+                'selector' => '{{WRAPPER}} .gform_wrapper textarea',
             ]
         );
 
@@ -421,7 +422,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} textarea' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper textarea' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -435,7 +436,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} textarea' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper textarea' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -468,7 +469,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 ],
                 'separator' => 'before',
                 'selectors' => [
-                    '{{WRAPPER}} select' => 'appearance: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper select' => 'appearance: {{VALUE}};',
                 ],
 			]
 		);
@@ -488,7 +489,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .ginput_container_select' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .ginput_container_select' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -500,15 +501,15 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 8,
+					'top' => 0,
 					'right' => 0,
-					'bottom' => 16,
+					'bottom' => 0,
 					'left' => 0,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -518,7 +519,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'select_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} select',
+				'selector' => '{{WRAPPER}} .gform_wrapper select',
 			]
 		);
 
@@ -537,7 +538,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -550,7 +551,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} select',
+                'selector' => '{{WRAPPER}} .gform_wrapper select',
             ]
         );
 
@@ -564,7 +565,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} select' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper select' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -578,7 +579,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} select' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper select' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -612,7 +613,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gform_footer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .gform_footer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -624,15 +625,15 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 8,
+					'top' => 0,
 					'right' => 0,
-					'bottom' => 16,
+					'bottom' => 0,
 					'left' => 0,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -642,7 +643,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'submit_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} input[type="submit"]',
+				'selector' => '{{WRAPPER}} .gform_wrapper input[type="submit"]',
 			]
 		);
 
@@ -661,7 +662,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -674,7 +675,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} input[type="submit"]',
+                'selector' => '{{WRAPPER}} .gform_wrapper input[type="submit"]',
             ]
         );
 
@@ -688,7 +689,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} input[type="submit"]' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper input[type="submit"]' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -702,7 +703,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} input[type="submit"]' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper input[type="submit"]' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -758,7 +759,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		// 			'size' => 32,
 		// 		],
 		// 		'selectors' => [
-		// 			'{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before' => 'width: {{SIZE}}{{UNIT}};',
+		// 			'{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before' => 'width: {{SIZE}}{{UNIT}};',
 		// 		],
 		// 	]
 		// );
@@ -785,7 +786,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		// 			'size' => 32,
 		// 		],
 		// 		'selectors' => [
-		// 			'{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:after' => 'height: calc {{SIZE}}{{UNIT}};',
+		// 			'{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:after' => 'height: calc {{SIZE}}{{UNIT}};',
 		// 		],
 		// 	]
 		// );
@@ -812,7 +813,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		// 			'size' => 32,
 		// 		],
 		// 		'selectors' => [
-		// 			'{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:after' => 'width: calc {{SIZE}}{{UNIT}};',
+		// 			'{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:after' => 'width: calc {{SIZE}}{{UNIT}};',
 		// 		],
 		// 	]
 		// );
@@ -839,7 +840,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		// 			'size' => 32,
 		// 		],
 		// 		'selectors' => [
-		// 			'{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before' => 'height: {{SIZE}}{{UNIT}};',
+		// 			'{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before' => 'height: {{SIZE}}{{UNIT}};',
 		// 		],
 		// 	]
 		// );
@@ -855,7 +856,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -869,7 +870,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:after' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -879,7 +880,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'consent_checkbox_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before ',
+				'selector' => '{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before ',
 				'condition' => [
                     'consent_use_custom_checkbox' => 'yes',
                 ],
@@ -901,8 +902,8 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:after ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:before ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .consent_gf_use_custom_checkbox .gfield--type-consent [type="checkbox"] + label:after ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
 				'condition' => [
@@ -924,7 +925,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
         //         ],
         //         'separator' => 'before',
         //         'selectors' => [
-        //             '{{WRAPPER}} .gfield--type-consent' => 'display: {{VALUE}};',
+        //             '{{WRAPPER}} .gform_wrapper .gfield--type-consent' => 'display: {{VALUE}};',
         //         ],
 		// 	]
 		// );
@@ -944,7 +945,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gfield--type-consent' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .gfield--type-consent' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -956,15 +957,15 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		// 		'type' => \Elementor\Controls_Manager::DIMENSIONS,
 		// 		'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 		// 		'default' => [
-		// 			'top' => 8,
+		// 			'top' => 0,
 		// 			'right' => 0,
-		// 			'bottom' => 16,
+		// 			'bottom' => 0,
 		// 			'left' => 0,
 		// 			'unit' => 'px',
 		// 			'isLinked' => false,
 		// 		],
 		// 		'selectors' => [
-		// 			'{{WRAPPER}} .gfield--type-consent' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		// 			'{{WRAPPER}} .gform_wrapper .gfield--type-consent' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		// 		],
 		// 	]
 		// );
@@ -974,7 +975,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'wrapper_consent_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .gfield--type-consent ',
+				'selector' => '{{WRAPPER}} .gform_wrapper .gfield--type-consent ',
 			]
 		);
 
@@ -993,7 +994,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--type-consent ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper .gfield--type-consent ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -1006,7 +1007,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} .gfield--type-consent .gfield_consent_label',
+                'selector' => '{{WRAPPER}} .gform_wrapper .gfield--type-consent .gfield_consent_label',
             ]
         );
 
@@ -1046,7 +1047,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:before' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:before' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1060,7 +1061,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:after' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1070,7 +1071,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'checkbox_checkbox_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:before ',
+				'selector' => '{{WRAPPER}} .gform_wrapper .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:before ',
 				'condition' => [
                     'checkbox_use_custom_checkbox' => 'yes',
                 ],
@@ -1092,8 +1093,8 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:before ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:after ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:before ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .checkbox_gf_use_custom_checkbox .gfield--type-checkbox [type="checkbox"] + label:after ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
 				'condition' => [
@@ -1119,7 +1120,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gfield--type-checkbox' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .gfield--type-checkbox' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1130,7 +1131,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'wrapper_checkbox_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .gfield--type-checkbox ',
+				'selector' => '{{WRAPPER}} .gform_wrapper .gfield--type-checkbox ',
 			]
 		);
 
@@ -1149,7 +1150,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--type-checkbox ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper .gfield--type-checkbox ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ] 
@@ -1162,7 +1163,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} .gfield--type-checkbox .gfield_consent_label',
+                'selector' => '{{WRAPPER}} .gform_wrapper .gfield--type-checkbox .gfield_consent_label',
             ]
         );
 
@@ -1202,7 +1203,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:before' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:before' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1216,7 +1217,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:after' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1226,7 +1227,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'radio_radio_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:before ',
+				'selector' => '{{WRAPPER}} .gform_wrapper .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:before ',
 				'condition' => [
                     'radio_use_custom_radio' => 'yes',
                 ],
@@ -1248,8 +1249,8 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:before ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:after ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:before ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .radio_gf_use_custom_radio .gfield--type-radio [type="radio"] + label:after ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
 				'condition' => [
@@ -1275,7 +1276,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gfield--type-radio' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .gfield--type-radio' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1286,7 +1287,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'wrapper_radio_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .gfield--type-radio ',
+				'selector' => '{{WRAPPER}} .gform_wrapper .gfield--type-radio ',
 			]
 		);
 
@@ -1305,7 +1306,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--type-radio ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper .gfield--type-radio ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ] 
@@ -1318,13 +1319,152 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} .gfield--type-radio .gfield_consent_label',
+                'selector' => '{{WRAPPER}} .gform_wrapper .gfield--type-radio .gfield_consent_label',
             ]
         );
 
 		
 
 		$this->end_controls_section();
+    }
+
+    protected function register_section_controls(){
+        $this->start_controls_section(
+            'section_section',
+            [
+                'label' => esc_html__( 'Section Styling', 'textdomain' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+			'sections_margin',
+			[
+				'label' => esc_html__( 'Section margin', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 0,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gform_wrapper .gsection' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'sections_padding',
+			[
+				'label' => esc_html__( 'Section padding', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 0,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gform_wrapper .gsection_title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name' => 'section_border',
+				'separator' => 'before',
+				'selector' => '{{WRAPPER}} .gform_wrapper.gravity-theme .gsection',
+                'default' => 'solid'
+			]
+		);
+
+		$this->add_responsive_control(
+            'section_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => 0,
+                    'right' => 0,
+                    'bottom' => 0,
+                    'left' => 0,
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gsection' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+		$this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'section_typography', 
+                'global' => [
+
+                ],
+                'selector' => '{{WRAPPER}} .gform_wrapper .gsection_title',
+
+            ]
+        );
+
+
+		$this->add_control(
+            'section_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'global' => [
+
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gsection_title' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'section_hr_color',
+            [
+                'label' => esc_html__( 'Border Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'global' => [
+
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper.gravity-theme .gsection' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+		$this->add_control(
+            'section_color',
+            [
+                'label' => esc_html__( 'Background Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'global' => [
+
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gsection' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
     }
 
     protected function register_controls() {
@@ -1337,6 +1477,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		$this->register_checkbox_controls();
 		$this->register_radio_controls();
         $this->register_submit_controls(); 
+        $this->register_section_controls();
         
 
 	}

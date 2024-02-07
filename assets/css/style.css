@@ -2,8 +2,8 @@
     color:red;
 } */
 
-.gf_use_custom_checkbox .gfield_consent_label:after{
-
+.consent_gf_use_custom_checkbox .gfield_consent_label, .checkbox_gf_use_custom_checkbox .ginput_container_checkbox, .radio_gf_use_custom_radio .ginput_container_radio{
+  transform: translateX(30px);
 }
 
 
