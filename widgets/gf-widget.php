@@ -347,7 +347,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gfield--input-type-name input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gfield--type-name input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -367,7 +367,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gfield--input-type-name input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gfield--type-name input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -377,7 +377,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'name_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .gfield--input-type-name input',
+				'selector' => '{{WRAPPER}} .gfield--type-name input',
                 'default' => 'solid'
 			]
 		);
@@ -397,7 +397,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--input-type-name input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gfield--type-name input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -410,7 +410,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} .gfield--input-type-name input',
+                'selector' => '{{WRAPPER}} .gfield--type-name input',
 
             ]
         );
@@ -425,7 +425,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--input-type-name input' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .gfield--type-name input' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -439,7 +439,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--input-type-name input' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gfield--type-name input' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -472,7 +472,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gfield--input-type-email input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gfield--type-email input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -492,7 +492,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gfield--input-type-email input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gfield--type-email input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -502,7 +502,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'email' => 'email_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .gfield--input-type-email input',
+				'selector' => '{{WRAPPER}} .gfield--type-email input',
                 'default' => 'solid'
 			]
 		);
@@ -522,7 +522,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--input-type-email input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gfield--type-email input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -535,7 +535,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} .gfield--input-type-email input',
+                'selector' => '{{WRAPPER}} .gfield--type-email input',
 
             ]
         );
@@ -550,7 +550,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--input-type-email input' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .gfield--type-email input' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -564,7 +564,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gfield--input-type-email input' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gfield--type-email input' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
