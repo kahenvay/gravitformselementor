@@ -192,6 +192,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+        $this->fieldset_constrols();
         
 
         $this->end_controls_section();
@@ -233,10 +234,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 0,
-					'right' => 0,
-					'bottom' => 0,
-					'left' => 0,
+					'top' => 16,
+					'right' => 32,
+					'bottom' => 16,
+					'left' => 32,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
@@ -263,10 +264,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
                 'default' => [
-                    'top' => 20,
-                    'right' => 20,
-                    'bottom' => 20,
-                    'left' => 20,
+                    'top' => 50,
+                    'right' => 50,
+                    'bottom' => 50,
+                    'left' => 50,
                     'unit' => 'px',
                     'isLinked' => true,
                 ],
@@ -322,6 +323,256 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
     }
 
+    protected function register_name_controls(){
+        $this->start_controls_section(
+            'name_section',
+            [
+                'label' => esc_html__( 'Names Styling', 'textdomain' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+			'names_margin',
+			[
+				'label' => esc_html__( 'Input margin', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 0,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gfield--input-type-name input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'names_padding',
+			[
+				'label' => esc_html__( 'Input padding', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 16,
+					'right' => 32,
+					'bottom' => 16,
+					'left' => 32,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gfield--input-type-name input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name' => 'name_border',
+				'separator' => 'before',
+				'selector' => '{{WRAPPER}} .gfield--input-type-name input',
+                'default' => 'solid'
+			]
+		);
+
+		$this->add_responsive_control(
+            'name_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => 50,
+                    'right' => 50,
+                    'bottom' => 50,
+                    'left' => 50,
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gfield--input-type-name input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+		$this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'name_typography', 
+                'global' => [
+
+                ],
+                'selector' => '{{WRAPPER}} .gfield--input-type-name input',
+
+            ]
+        );
+
+
+		$this->add_control(
+            'name_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'global' => [
+
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gfield--input-type-name input' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+		$this->add_control(
+            'name_color',
+            [
+                'label' => esc_html__( 'Background Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'global' => [
+
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gfield--input-type-name input' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+    }
+
+    protected function register_emails_controls(){
+        $this->start_controls_section(
+            'email_section',
+            [
+                'label' => esc_html__( 'Emails Styling', 'textdomain' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+			'emails_margin',
+			[
+				'label' => esc_html__( 'Input margin', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 0,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gfield--input-type-email input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'emails_padding',
+			[
+				'label' => esc_html__( 'Input padding', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 16,
+					'right' => 32,
+					'bottom' => 16,
+					'left' => 32,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gfield--input-type-email input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'email' => 'email_border',
+				'separator' => 'before',
+				'selector' => '{{WRAPPER}} .gfield--input-type-email input',
+                'default' => 'solid'
+			]
+		);
+
+		$this->add_responsive_control(
+            'email_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => 50,
+                    'right' => 50,
+                    'bottom' => 50,
+                    'left' => 50,
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gfield--input-type-email input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+		$this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'email' => 'email_typography', 
+                'global' => [
+
+                ],
+                'selector' => '{{WRAPPER}} .gfield--input-type-email input',
+
+            ]
+        );
+
+
+		$this->add_control(
+            'email_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'global' => [
+
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gfield--input-type-email input' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+		$this->add_control(
+            'email_color',
+            [
+                'label' => esc_html__( 'Background Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'global' => [
+
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gfield--input-type-email input' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+    }
+
     protected function register_textarea_controls(){
         $this->start_controls_section(
             'textarea_section',
@@ -358,10 +609,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 0,
-					'right' => 0,
-					'bottom' => 0,
-					'left' => 0,
+					'top' => 16,
+					'right' => 32,
+					'bottom' => 16,
+					'left' => 32,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
@@ -387,10 +638,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
                 'default' => [
-                    'top' => 20,
-                    'right' => 20,
-                    'bottom' => 20,
-                    'left' => 20,
+                    'top' => 50,
+                    'right' => 50,
+                    'bottom' => 50,
+                    'left' => 50,
                     'unit' => 'px',
                     'isLinked' => true,
                 ],
@@ -501,10 +752,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 0,
-					'right' => 0,
-					'bottom' => 0,
-					'left' => 0,
+					'top' => 16,
+					'right' => 32,
+					'bottom' => 16,
+					'left' => 32,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
@@ -530,10 +781,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
                 'default' => [
-                    'top' => 20,
-                    'right' => 20,
-                    'bottom' => 20,
-                    'left' => 20,
+                    'top' => 50,
+                    'right' => 50,
+                    'bottom' => 50,
+                    'left' => 50,
                     'unit' => 'px',
                     'isLinked' => true,
                 ],
@@ -625,10 +876,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
-					'top' => 0,
-					'right' => 0,
-					'bottom' => 0,
-					'left' => 0,
+					'top' => 16,
+					'right' => 32,
+					'bottom' => 16,
+					'left' => 32,
 					'unit' => 'px',
 					'isLinked' => false,
 				],
@@ -654,10 +905,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
                 'default' => [
-                    'top' => 20,
-                    'right' => 20,
-                    'bottom' => 20,
-                    'left' => 20,
+                    'top' => 50,
+                    'right' => 50,
+                    'bottom' => 50,
+                    'left' => 50,
                     'unit' => 'px',
                     'isLinked' => true,
                 ],
@@ -970,35 +1221,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		// 	]
 		// );
 
-		$this->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
-			[
-				'name' => 'wrapper_consent_border',
-				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .gform_wrapper .gfield--type-consent ',
-			]
-		);
-
-		$this->add_responsive_control(
-            'wrapper_consent_border_radius',
-            [
-                'label' => esc_html__( 'Wrapper Border Radius', 'elementor-pro' ),
-                'type' => \Elementor\Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-                'default' => [
-                    'top' => 20,
-                    'right' => 20,
-                    'bottom' => 20,
-                    'left' => 20,
-                    'unit' => 'px',
-                    'isLinked' => true,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .gform_wrapper .gfield--type-consent ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'separator' => 'after',
-            ]
-        );
+		
 
 		$this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
@@ -1298,10 +1521,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
                 'default' => [
-                    'top' => 20,
-                    'right' => 20,
-                    'bottom' => 20,
-                    'left' => 20,
+                    'top' => 0,
+                    'right' => 0,
+                    'bottom' => 0,
+                    'left' => 0,
                     'unit' => 'px',
                     'isLinked' => true,
                 ],
@@ -1467,10 +1690,72 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
     }
 
+    protected function fieldset_constrols(){
+        // $this->start_controls_section(
+        //     'fieldset_section_title',
+        //     [
+        //         'label' => esc_html__( 'Fieldsets', 'elementor-addon' ),
+        //         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+        //     ]
+        // );
+
+        $this->add_control(
+			'show_fieldset',
+			[
+				'label' => esc_html__( 'Show Fieldset Borders', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'textdomain' ),
+				'label_off' => esc_html__( 'Hide', 'textdomain' ),
+				'return_value' => 'yes',
+				'default' => 'no',
+                'separator' => 'before',
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name' => 'wrapper_consent_border',
+				
+				'selector' => '{{WRAPPER}} .gform_wrapper fieldset ',
+                'condition' => [
+                    'show_fieldset' => 'yes',
+                ],
+			]
+		);
+
+		$this->add_responsive_control(
+            'wrapper_consent_border_radius',
+            [
+                'label' => esc_html__( 'Wrapper Border Radius', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => 0,
+                    'right' => 0,
+                    'bottom' => 0,
+                    'left' => 0,
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper fieldset ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+                'condition' => [
+                    'show_fieldset' => 'yes',
+                ],
+            ]
+        );
+        // $this->end_controls_section();
+    }
+
     protected function register_controls() {
 
 		$this->register_main_controls();
         $this->register_input_controls();
+        $this->register_emails_controls();
+        $this->register_name_controls();
         $this->register_textarea_controls();
 		$this->register_select_controls();
 		$this->register_consent_controls();
@@ -1492,6 +1777,8 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		$consent_use_custom_checkbox = $settings['consent_use_custom_checkbox'] == 'yes' ? 'consent_gf_use_custom_checkbox' : '';
 		$checkbox_use_custom_checkbox = $settings['checkbox_use_custom_checkbox'] == 'yes' ? 'checkbox_gf_use_custom_checkbox' : '';
 		$radio_use_custom_radio = $settings['radio_use_custom_radio'] == 'yes' ? 'radio_gf_use_custom_radio' : '';
+        $show_fieldset = $settings['show_fieldset'] == 'yes' ? '' : 'hide_fieldsets';
+        
 		?>
 
 
@@ -1499,7 +1786,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
 
 <div
-    class="gf-widget <?php echo $consent_use_custom_checkbox; ?>  <?php echo $checkbox_use_custom_checkbox; ?>  <?php echo $radio_use_custom_radio; ?>">
+    class="gf-widget <?php echo $consent_use_custom_checkbox; ?>  <?php echo $checkbox_use_custom_checkbox; ?>  <?php echo $radio_use_custom_radio; ?>  <?php echo $show_fieldset; ?>">
     <?php echo do_shortcode('[gravityform id="'.$settings['gravity_form'].'" title="'.$show_title.'" description="'.$show_description.'" ajax="'.$use_ajax.'"]'); ?>
 </div>
 
