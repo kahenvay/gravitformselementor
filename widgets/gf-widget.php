@@ -170,6 +170,27 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		);
 
         $this->add_control(
+			'sub_label_display',
+			[
+				'label' => esc_html__( 'Sub Label Display', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => esc_html__( 'None', 'elementor-pro' ),
+                    'block' => esc_html__( 'Block', 'elementor-pro' ),
+                    'inline-block' => esc_html__( 'Inline-Block', 'elementor-pro' ),
+                    'inline' => esc_html__( 'Inline', 'elementor-pro' ),
+                    'flex' => esc_html__( 'Flex', 'elementor-pro' ),
+                    'inline-flex' => esc_html__( 'Inline-flex', 'elementor-pro' ),
+                ],
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gform-field-label.gform-field-label--type-sub' => 'display: {{VALUE}};',
+                ],
+			]
+		);
+
+        $this->add_control(
 			'label_margin',
 			[
 				'label' => esc_html__( 'Label margin', 'textdomain' ),
