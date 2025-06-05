@@ -274,3 +274,216 @@
   margin: 0;
   font-size: 14px;
 }
+
+/* Form Settings Integration Styling */
+.gf-widget-override-notice {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.gf-widget-override-notice strong {
+  color: #856404;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Form settings integration classes for debugging/styling */
+.gf-widget-inherits-settings {
+  /* Base class when inheriting form settings */
+}
+
+.gf-widget-override-labels {
+  /* Applied when label placement is overridden */
+}
+
+.gf-widget-override-descriptions {
+  /* Applied when description placement is overridden */
+}
+
+.gf-widget-override-sublabels {
+  /* Applied when sub-label placement is overridden */
+}
+
+.gf-widget-override-required {
+  /* Applied when required indicator is overridden */
+}
+
+.gf-widget-override-validation {
+  /* Applied when validation summary is overridden */
+}
+
+.gf-widget-override-animation {
+  /* Applied when animation settings are overridden */
+}
+
+/* Enhanced styling for forms with overrides */
+.gf-widget-inherits-settings .gform_wrapper {
+  position: relative;
+}
+
+/* Add a subtle indicator for overridden forms in editor mode */
+.elementor-editor-active .gf-widget-inherits-settings::before {
+  content: "Form Settings Integration Active";
+  position: absolute;
+  top: -25px;
+  left: 0;
+  background: #0073aa;
+  color: white;
+  padding: 2px 8px;
+  font-size: 10px;
+  border-radius: 3px;
+  z-index: 1000;
+  opacity: 0.8;
+}
+
+/* Required Indicator Styling */
+.gf-widget .gfield_required {
+  color: #d63638;
+  font-weight: bold;
+}
+
+/* Different styles for different required indicator types */
+.gf-widget .gfield_required_text {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 0.9em;
+}
+
+.gf-widget .gfield_required_asterisk {
+  color: #d63638;
+  font-weight: bold;
+}
+
+.gf-widget .gfield_required_custom {
+  color: #d63638;
+  font-weight: bold;
+}
+
+/* Label Placement Integration Styling */
+/* These styles support the Gravity Forms label placement overrides */
+
+/* Auto display handling - only apply when label_display is set to auto */
+.gf-widget .gform_wrapper .gfield_label[style*="display: auto"],
+.gf-widget .gform_wrapper .gfield_label:not([style*="display:"]) {
+  /* Let the label placement CSS handle the display */
+}
+
+/* Top Label Placement (default) */
+.gf-widget .gform_wrapper[data-label-placement="top_label"] .gfield_label:not([style*="display:"]),
+.gf-widget .gform_wrapper[data-label-placement="top_label"] .gfield_label[style*="display: auto"],
+.gf-widget .gform_wrapper.gform-theme--foundation .gfield_label:not([style*="display:"]),
+.gf-widget .gform_wrapper.gform-theme--api .gfield_label:not([style*="display:"]) {
+  display: block !important;
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+
+/* Left Label Placement */
+.gf-widget .gform_wrapper[data-label-placement="left_label"] .gfield {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+.gf-widget .gform_wrapper[data-label-placement="left_label"] .gfield_label:not([style*="display:"]),
+.gf-widget .gform_wrapper[data-label-placement="left_label"] .gfield_label[style*="display: auto"] {
+  display: block !important;
+  flex: 0 0 auto;
+  width: 30%;
+  min-width: 120px;
+  margin-bottom: 0;
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+.gf-widget .gform_wrapper[data-label-placement="left_label"] .ginput_container {
+  flex: 1;
+}
+
+.gf-widget .gform_wrapper[data-label-placement="left_label"] .gfield_description {
+  flex: 1;
+  margin-left: calc(30% + 1em);
+}
+
+/* Right Label Placement */
+.gf-widget .gform_wrapper[data-label-placement="right_label"] .gfield {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+  flex-direction: row-reverse;
+}
+
+.gf-widget .gform_wrapper[data-label-placement="right_label"] .gfield_label:not([style*="display:"]),
+.gf-widget .gform_wrapper[data-label-placement="right_label"] .gfield_label[style*="display: auto"] {
+  display: block !important;
+  flex: 0 0 auto;
+  width: 30%;
+  min-width: 120px;
+  margin-bottom: 0;
+  padding-top: 0.5em;
+  text-align: left;
+}
+
+.gf-widget .gform_wrapper[data-label-placement="right_label"] .ginput_container {
+  flex: 1;
+}
+
+.gf-widget .gform_wrapper[data-label-placement="right_label"] .gfield_description {
+  flex: 1;
+  margin-right: calc(30% + 1em);
+  order: -1;
+}
+
+/* Responsive adjustments for label placement */
+@media (max-width: 768px) {
+  .gf-widget .gform_wrapper[data-label-placement="left_label"] .gfield,
+  .gf-widget .gform_wrapper[data-label-placement="right_label"] .gfield {
+    flex-direction: column;
+  }
+
+  .gf-widget .gform_wrapper[data-label-placement="left_label"] .gfield_label:not([style*="display:"]),
+  .gf-widget .gform_wrapper[data-label-placement="left_label"] .gfield_label[style*="display: auto"],
+  .gf-widget .gform_wrapper[data-label-placement="right_label"] .gfield_label:not([style*="display:"]),
+  .gf-widget .gform_wrapper[data-label-placement="right_label"] .gfield_label[style*="display: auto"] {
+    display: block !important;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.5em;
+    padding-top: 0;
+  }
+
+  .gf-widget .gform_wrapper[data-label-placement="left_label"] .gfield_description,
+  .gf-widget .gform_wrapper[data-label-placement="right_label"] .gfield_description {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Enhanced styling for overridden label placements */
+.gf-widget-override-labels .gform_wrapper {
+  position: relative;
+}
+
+.gf-widget-override-labels .gform_wrapper::before {
+  content: "Label Placement Override Active";
+  position: absolute;
+  top: -20px;
+  right: 0;
+  background: #0073aa;
+  color: white;
+  padding: 2px 6px;
+  font-size: 10px;
+  border-radius: 3px;
+  z-index: 1000;
+  opacity: 0.8;
+}
+
+/* Hide the override indicator on frontend */
+.gf-widget-override-labels:not(.elementor-editor-active) .gform_wrapper::before {
+  display: none;
+}
