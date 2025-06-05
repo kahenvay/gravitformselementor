@@ -1,4 +1,9 @@
 <?php
+// Prevent direct access
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
     // public function __construct($data = [], $args = null) {
@@ -35,16 +40,33 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 	}
 
     private function get_forms_select_options(){
+        // Check if GFAPI class exists
+        if ( ! class_exists( 'GFAPI' ) ) {
+            return array(
+                '' => esc_html__( 'Gravity Forms not available', 'elementor-addon' )
+            );
+        }
+
         $results = GFAPI::get_forms();
 
-        $options = [];
+        $options = array();
 
-        foreach ($results as $result){
-            $options[$result['id']] = $result['title'];
+        if ( is_array( $results ) ) {
+            foreach ( $results as $result ) {
+                if ( isset( $result['id'] ) && isset( $result['title'] ) ) {
+                    $options[ $result['id'] ] = $result['title'];
+                }
+            }
+        }
+
+        // If no forms found, provide a helpful message
+        if ( empty( $options ) ) {
+            $options = array(
+                '' => esc_html__( 'No forms found', 'elementor-addon' )
+            );
         }
 
         return $options;
-
     }
 
     protected function register_main_controls(){
@@ -1789,7 +1811,23 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 	}
 
 	protected function render() {
-        $settings = $this->get_settings_for_display(); 
+        $settings = $this->get_settings_for_display();
+
+        // Check if Gravity Forms is available
+        if ( ! class_exists( 'GFForms' ) || ! function_exists( 'do_shortcode' ) ) {
+            echo '<div class="gf-widget-error">';
+            echo '<p>' . esc_html__( 'Gravity Forms is not available. Please install and activate Gravity Forms.', 'elementor-addon' ) . '</p>';
+            echo '</div>';
+            return;
+        }
+
+        // Check if a form is selected
+        if ( empty( $settings['gravity_form'] ) ) {
+            echo '<div class="gf-widget-error">';
+            echo '<p>' . esc_html__( 'Please select a Gravity Form in the widget settings.', 'elementor-addon' ) . '</p>';
+            echo '</div>';
+            return;
+        }
 
         $show_title = $settings['show_title'] == 'yes' ? 'true' : 'false';
         $show_description = $settings['show_description'] == 'yes' ? 'true' : 'false';
@@ -1806,9 +1844,8 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
 
 
-<div
-    class="gf-widget <?php echo $consent_use_custom_checkbox; ?>  <?php echo $checkbox_use_custom_checkbox; ?>  <?php echo $radio_use_custom_radio; ?>  <?php echo $show_fieldset; ?>">
-    <?php echo do_shortcode('[gravityform id="'.$settings['gravity_form'].'" title="'.$show_title.'" description="'.$show_description.'" ajax="'.$use_ajax.'"]'); ?>
+<div class="gf-widget <?php echo esc_attr( $consent_use_custom_checkbox ); ?> <?php echo esc_attr( $checkbox_use_custom_checkbox ); ?> <?php echo esc_attr( $radio_use_custom_radio ); ?> <?php echo esc_attr( $show_fieldset ); ?>">
+    <?php echo do_shortcode( '[gravityform id="' . esc_attr( $settings['gravity_form'] ) . '" title="' . esc_attr( $show_title ) . '" description="' . esc_attr( $show_description ) . '" ajax="' . esc_attr( $use_ajax ) . '"]' ); ?>
 </div>
 
 
