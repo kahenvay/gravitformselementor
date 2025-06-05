@@ -1,0 +1,113 @@
+# WordPress Plugin .gitignore
+
+# Composer Dependencies
+/vendor/
+composer.lock
+
+# Testing
+/tests/coverage/
+/tests/tmp/
+phpunit.xml.local
+.phpunit.result.cache
+
+# WordPress Test Environment
+/tmp/
+/wordpress-tests-lib/
+wp-tests-config.php
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.atom/
+.brackets.json
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+error_log
+debug.log
+/logs/
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.#*
+
+# Build and Distribution
+/build/
+/dist/
+/release/
+*.zip
+*.tar.gz
+
+# Node.js (if you add frontend build tools later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Environment Files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Cache Files
+.cache/
+*.cache
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# WordPress Specific
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/backup-db/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/cache/
+wp-content/backups/
+
+# Plugin Specific
+# Add any plugin-specific files you don't want to track
+
+# Documentation Build (if using tools like GitBook)
+_book/
+
+# Coverage Reports (keep structure, ignore content)
+/tests/coverage/*
+!/tests/coverage/.gitkeep
+
+# Local Development
+local-config.php
+.htaccess.local
+
+# Security
+*.pem
+*.key
+*.crt
+
+# Database
+*.sql
+*.sqlite
+*.db

@@ -1,0 +1,50 @@
+{
+	"name": "impacthub/gravity-form-elementor-widget",
+	"description": "Adds a customizable widget for Gravity Forms in Elementor",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Impact Hub",
+			"homepage": "https://impacthub.net"
+		}
+	],
+	"require": {
+		"php": ">=7.4"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^9.0",
+		"brain/monkey": "^2.6",
+		"mockery/mockery": "^1.4",
+		"wp-coding-standards/wpcs": "^2.3",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"roave/security-advisories": "dev-latest"
+	},
+	"autoload": {
+		"psr-4": {
+			"GravityFormElementor\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"GravityFormElementor\\Tests\\": "tests/"
+		}
+	},
+	"scripts": {
+		"test": "phpunit",
+		"test:unit": "phpunit -c phpunit-unit.xml",
+		"test:integration": "phpunit -c phpunit-integration.xml",
+		"test:coverage": "phpunit --coverage-html tests/coverage/html",
+		"cs:check": "phpcs --standard=WordPress .",
+		"cs:fix": "phpcbf --standard=WordPress .",
+		"install-wp-tests": [
+			"bash bin/install-wp-tests.sh wordpress_test root '' localhost latest"
+		]
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}
