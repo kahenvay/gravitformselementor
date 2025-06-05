@@ -92,6 +92,27 @@ If dependencies are missing, users will see:
 6. Customize the appearance using the available styling options
 7. Publish your page
 
+## Testing
+
+This plugin includes comprehensive unit tests to ensure reliability and functionality.
+
+### Quick Test
+
+```bash
+vendor/bin/phpunit -c phpunit-unit.xml --filter "BasicTest|ComprehensiveTest"
+```
+
+**Expected:** `OK (25 tests, 104 assertions)`
+
+### Test Coverage
+
+- ✅ Plugin core functionality (dependency checking, version compatibility)
+- ✅ Widget functionality (properties, settings, inheritance)
+- ✅ WordPress integration (hooks, styles, functions)
+- ✅ Gravity Forms integration (GFAPI, form retrieval)
+
+See `TEST_SUMMARY.md` for complete test documentation and `QUICK_TEST_GUIDE.md` for testing instructions.
+
 ## Support
 
 For support and feature requests, please contact support@impacthub.net.
