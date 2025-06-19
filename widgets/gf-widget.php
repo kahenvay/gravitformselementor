@@ -302,31 +302,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'display: {{VALUE}};',
                 ],
-                'condition' => [
-                    'label_display!' => 'auto',
-                ],
+                // 'condition' => [
+                //     'label_display!' => 'auto',
+                // ],
                 'description' => esc_html__( 'Override the CSS display property for labels. "Auto" uses the optimal display based on label placement. Only change this if you need specific display behavior.', 'elementor-addon' ),
-			]
-		);
-
-        $this->add_control(
-			'sub_label_display',
-			[
-				'label' => esc_html__( 'Sub Label Display', 'textdomain' ),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'default' => 'none',
-                'options' => [
-                    'none' => esc_html__( 'None', 'elementor-pro' ),
-                    'block' => esc_html__( 'Block', 'elementor-pro' ),
-                    'inline-block' => esc_html__( 'Inline-Block', 'elementor-pro' ),
-                    'inline' => esc_html__( 'Inline', 'elementor-pro' ),
-                    'flex' => esc_html__( 'Flex', 'elementor-pro' ),
-                    'inline-flex' => esc_html__( 'Inline-flex', 'elementor-pro' ),
-                ],
-                'separator' => 'before',
-                'selectors' => [
-                    '{{WRAPPER}} .gform_wrapper .gform-field-label.gform-field-label--type-sub' => 'display: {{VALUE}};',
-                ],
 			]
 		);
 
@@ -352,6 +331,29 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 ],
 			]
 		);
+
+        $this->add_control(
+			'sub_label_display',
+			[
+				'label' => esc_html__( 'Sub Label Display', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => esc_html__( 'None', 'elementor-pro' ),
+                    'block' => esc_html__( 'Block', 'elementor-pro' ),
+                    'inline-block' => esc_html__( 'Inline-Block', 'elementor-pro' ),
+                    'inline' => esc_html__( 'Inline', 'elementor-pro' ),
+                    'flex' => esc_html__( 'Flex', 'elementor-pro' ),
+                    'inline-flex' => esc_html__( 'Inline-flex', 'elementor-pro' ),
+                ],
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gform-field-label.gform-field-label--type-sub' => 'display: {{VALUE}};',
+                ],
+			]
+		);
+
+        
 
         $this->fieldset_constrols();
 
@@ -519,9 +521,9 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'label_off' => esc_html__( 'No', 'elementor-addon' ),
                 'return_value' => 'yes',
                 'default' => 'no',
-                'condition' => [
-                    'inherit_form_settings' => 'yes',
-                ],
+                // 'condition' => [
+                //     'inherit_form_settings' => 'yes',
+                // ],
             ]
         );
 
@@ -537,7 +539,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 ],
                 'default' => 'asterisk',
                 'condition' => [
-                    'inherit_form_settings' => 'yes',
+                    // 'inherit_form_settings' => 'yes',
                     'override_required_indicator' => 'yes',
                 ],
             ]
@@ -551,7 +553,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'default' => '*',
                 'placeholder' => esc_html__( 'Enter custom indicator', 'elementor-addon' ),
                 'condition' => [
-                    'inherit_form_settings' => 'yes',
+                    // 'inherit_form_settings' => 'yes',
                     'override_required_indicator' => 'yes',
                     'required_indicator_override' => 'custom',
                 ],
@@ -570,7 +572,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'default' => 'no',
                 'description' => esc_html__( 'Show validation errors summary at top of form', 'elementor-addon' ),
                 'condition' => [
-                    'inherit_form_settings' => 'yes',
+                    // 'inherit_form_settings' => 'yes',
                 ],
             ]
         );
@@ -585,7 +587,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'return_value' => 'yes',
                 'default' => 'no',
                 'condition' => [
-                    'inherit_form_settings' => 'yes',
+                    // 'inherit_form_settings' => 'yes',
                     'override_validation_summary' => 'yes',
                 ],
             ]
@@ -603,7 +605,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'default' => 'no',
                 'description' => esc_html__( 'Enable slide animations for conditional logic', 'elementor-addon' ),
                 'condition' => [
-                    'inherit_form_settings' => 'yes',
+                    // 'inherit_form_settings' => 'yes',
                 ],
             ]
         );
@@ -618,7 +620,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'return_value' => 'yes',
                 'default' => 'no',
                 'condition' => [
-                    'inherit_form_settings' => 'yes',
+                    // 'inherit_form_settings' => 'yes',
                     'override_animation' => 'yes',
                 ],
             ]
