@@ -1,15 +1,31 @@
-# Testing Setup for Gravity Form Elementor Widget
+# Testing Guide for Gravity Form Elementor Widget
 
-This document provides a comprehensive guide to setting up and running tests for the Gravity Form Elementor Widget plugin.
+This document provides a comprehensive guide to testing the Gravity Form Elementor Widget plugin. It covers both quick testing for immediate verification and detailed testing procedures for development.
 
 ## Quick Start
 
+### Run Basic Tests
+
+```bash
+# Install dependencies first
+composer install
+
+# Run all working tests (53 tests)
+bash bin/run-tests.sh -t unit
+
+# Expected result: OK (53 tests, 205 assertions)
+```
+
+## Test Setup
+
 ### 1. Install Dependencies
+
 ```bash
 composer install
 ```
 
-### 2. Set Up WordPress Test Environment
+### 2. Set Up WordPress Test Environment (for Integration Tests)
+
 ```bash
 # For local development with default settings
 ./bin/run-tests.sh --setup-wp
@@ -18,295 +34,205 @@ composer install
 bash bin/install-wp-tests.sh wordpress_test root '' localhost latest
 ```
 
-### 3. Run Tests
+### 3. Run Different Test Types
+
 ```bash
 # Run all tests
 ./bin/run-tests.sh
 
-# Run specific test types
-./bin/run-tests.sh --type unit
-./bin/run-tests.sh --type integration
+# Run only unit tests
+./bin/run-tests.sh -t unit
 
-# Run with coverage
-./bin/run-tests.sh --coverage
+# Run only integration tests
+./bin/run-tests.sh -t integration
+
+# Run tests with coverage report
+./bin/run-tests.sh -c
 ```
 
-## Understanding the Test Structure
+## Test Structure
 
-### Test Types Explained
+The plugin includes several test suites:
 
-#### 1. **Unit Tests** (`tests/unit/`)
-**Purpose:** Test individual functions and methods in isolation
+### Unit Tests
 
-**What they test:**
-- Plugin initialization functions
-- Widget class methods
-- Form settings retrieval
-- Dependency checking
-- Version compatibility
+These tests don't require WordPress and run quickly:
 
-**Benefits:**
-- Fast execution (no database)
-- Isolated testing
-- Easy to debug
-- Mock external dependencies
+- **BasicTest**: Validates testing setup and basic functionality
+- **ComprehensiveTest**: Tests all major plugin functionality
+- **PluginFunctionsTest**: Tests individual plugin functions
+- **WidgetFunctionalityTest**: Tests widget-specific functionality
 
-**Example:**
-```php
-public function test_dependency_check_with_missing_elementor() {
-    Functions\when('did_action')->with('elementor/loaded')->justReturn(false);
-    Functions\when('class_exists')->with('GFForms')->justReturn(true);
-    
-    $missing = gf_elementor_widget_check_dependencies();
-    
-    $this->assertContains('Elementor', $missing);
-}
+### Integration Tests
+
+These tests require a WordPress test environment:
+
+- **PluginIntegrationTest**: Tests plugin integration with WordPress
+- **FullIntegrationTest**: Tests complete plugin workflow
+- **WidgetRenderingTest**: Tests widget rendering in WordPress
+
+## What Gets Tested
+
+### Plugin Core Functionality
+
+- Plugin constants and configuration
+- Dependency checking (Elementor, Gravity Forms)
+- PHP version compatibility
+- WordPress hooks and actions
+- Style registration and enqueueing
+
+### Widget Functionality
+
+- Widget properties (name, title, icon)
+- Widget categories and keywords
+- Form settings retrieval and management
+- Form settings integration and overrides
+- Widget rendering and error handling
+
+### Gravity Forms Integration
+
+- Form retrieval via GFAPI
+- Form settings extraction
+- Form rendering with shortcodes
+- Form settings overrides via hooks
+
+### WordPress Integration
+
+- Admin notices for missing dependencies
+- Widget registration with Elementor
+- Style enqueueing
+- Error handling and graceful degradation
+
+## Running Specific Tests
+
+### Test Individual Files
+
+```bash
+# Test basic functionality
+vendor/bin/phpunit --testsuite="Unit Tests" --filter=BasicTest
+
+# Test widget functionality
+vendor/bin/phpunit --testsuite="Unit Tests" --filter=WidgetFunctionalityTest
 ```
 
-#### 2. **Integration Tests** (`tests/integration/`)
-**Purpose:** Test plugin functionality within WordPress environment
+### Test Specific Methods
 
-**What they test:**
-- Plugin activation/deactivation
-- WordPress hooks and filters
-- Database interactions
-- Widget rendering with real WordPress
-- Admin notices
-- Style/script registration
+```bash
+# Test dependency checking
+vendor/bin/phpunit --testsuite="Unit Tests" --filter=test_dependency_checking
 
-**Benefits:**
-- Tests real WordPress behavior
-- Catches integration issues
-- Tests actual plugin workflow
-
-**Example:**
-```php
-public function test_widget_rendering_in_wordpress() {
-    $widget = new \Elementor_GF_Widget();
-    $widget->set_settings(['gravity_form' => '1']);
-    
-    ob_start();
-    $widget->render();
-    $output = ob_get_clean();
-    
-    $this->assertStringContainsString('gform_wrapper', $output);
-}
+# Test widget settings
+vendor/bin/phpunit --testsuite="Unit Tests" --filter=test_widget_settings
 ```
 
-## Testing WordPress Plugins - Best Practices
+## Test Coverage
 
-### 1. **Plugin Activation Testing**
-```php
-public function test_plugin_activation() {
-    // Test constants are defined
-    $this->assertTrue(defined('GF_ELEMENTOR_WIDGET_VERSION'));
-    
-    // Test functions exist
-    $this->assertTrue(function_exists('gf_elementor_widget_init'));
-    
-    // Test hooks are registered
-    $this->assertTrue(has_action('plugins_loaded', 'gf_elementor_widget_init'));
-}
+The plugin has comprehensive test coverage for core functionality:
+
+- ✅ Plugin initialization and dependency checking
+- ✅ Widget registration and basic properties
+- ✅ Form settings retrieval and management
+- ✅ Style registration and enqueueing
+- ✅ Error handling and graceful degradation
+
+### Generate Coverage Reports
+
+```bash
+# Generate HTML coverage report
+./bin/run-tests.sh -c
+
+# View the report at tests/coverage/html/index.html
 ```
 
-### 2. **Dependency Testing**
-```php
-public function test_missing_dependencies() {
-    // Mock missing Elementor
-    Functions\when('did_action')->with('elementor/loaded')->justReturn(false);
-    
-    $missing = gf_elementor_widget_check_dependencies();
-    $this->assertContains('Elementor', $missing);
-}
-```
+## Troubleshooting Tests
 
-### 3. **Admin Notice Testing**
-```php
-public function test_admin_notices() {
-    ob_start();
-    gf_elementor_widget_admin_notice_missing_dependencies();
-    $output = ob_get_clean();
-    
-    $this->assertStringContainsString('notice', $output);
-}
-```
+### Common Issues
 
-## Testing Elementor Widgets
+1. **Missing Dependencies**
+   - Run `composer install` to install PHPUnit and other dependencies
 
-### 1. **Widget Registration**
-```php
-public function test_widget_registration() {
-    $widget = new \Elementor_GF_Widget();
-    
-    $this->assertEquals('gf_widget', $widget->get_name());
-    $this->assertEquals('Gravity Form', $widget->get_title());
-    $this->assertEquals('eicon-form-horizontal', $widget->get_icon());
-}
-```
+2. **WordPress Test Environment**
+   - For integration tests, ensure MySQL is running
+   - Check database credentials in `bin/install-wp-tests.sh`
 
-### 2. **Widget Controls**
-```php
-public function test_widget_controls() {
-    $widget = new \Elementor_GF_Widget();
-    
-    // Test that controls can be registered without errors
-    $reflection = new \ReflectionClass($widget);
-    if ($reflection->hasMethod('register_controls')) {
-        $method = $reflection->getMethod('register_controls');
-        $method->setAccessible(true);
-        $method->invoke($widget);
-        
-        $this->assertTrue(true); // No exception thrown
-    }
-}
-```
+3. **Permission Issues**
+   - Ensure test scripts are executable: `chmod +x bin/*.sh`
 
-### 3. **Widget Rendering**
-```php
-public function test_widget_rendering() {
-    $widget = new \Elementor_GF_Widget();
-    $widget->set_settings([
-        'gravity_form' => '1',
-        'show_title' => 'yes'
-    ]);
-    
-    ob_start();
-    $widget->render();
-    $output = ob_get_clean();
-    
-    $this->assertStringContainsString('gform_wrapper', $output);
-}
-```
+4. **PHP Version**
+   - Tests require PHP 7.4 or higher
 
-## Testing Gravity Forms Integration
+### When Tests Fail
 
-### 1. **Form Retrieval**
-```php
-public function test_form_retrieval() {
-    // Mock GFAPI
-    Functions\when('class_exists')->with('GFAPI')->justReturn(true);
-    Functions\when('GFAPI::get_forms')->justReturn([
-        ['id' => '1', 'title' => 'Contact Form']
-    ]);
-    
-    $widget = new \Elementor_GF_Widget();
-    $options = $this->getPrivateMethod($widget, 'get_forms_select_options')->invoke($widget);
-    
-    $this->assertArrayHasKey('1', $options);
-    $this->assertEquals('Contact Form', $options['1']);
-}
-```
+1. Read the error message carefully - it often points directly to the issue
+2. Check if the test is expecting a specific WordPress function or class
+3. Verify that mock classes are properly defined
+4. Check for syntax errors in recently modified files
 
-### 2. **Form Settings Integration**
-```php
-public function test_form_settings_inheritance() {
-    $mock_form = [
-        'id' => '1',
-        'labelPlacement' => 'left_label',
-        'descriptionPlacement' => 'above'
-    ];
-    
-    Functions\when('GFAPI::get_form')->with('1')->justReturn($mock_form);
-    
-    $widget = new \Elementor_GF_Widget();
-    $settings = $this->getPrivateMethod($widget, 'get_form_settings')->invoke($widget, '1');
-    
-    $this->assertEquals('left_label', $settings['labelPlacement']);
-    $this->assertEquals('above', $settings['descriptionPlacement']);
-}
-```
+## Best Practices
 
-## Common Testing Patterns
+1. **Run Tests Frequently**
+   - Before making changes (to verify current state)
+   - After making changes (to catch regressions)
+   - Before committing code
 
-### 1. **Mocking WordPress Functions**
-```php
-// In unit tests with Brain Monkey
-Functions\when('esc_html__')->returnArg();
-Functions\when('wp_enqueue_style')->justReturn(true);
-Functions\when('plugins_url')->justReturn('http://example.com/plugin');
-```
+2. **Add Tests for New Features**
+   - Write tests for any new functionality
+   - Update existing tests when changing behavior
 
-### 2. **Testing Private Methods**
-```php
-$reflection = new \ReflectionClass($object);
-$method = $reflection->getMethod('private_method');
-$method->setAccessible(true);
-$result = $method->invoke($object, $param1, $param2);
-```
+3. **Use Test-Driven Development**
+   - Write tests before implementing features
+   - Use tests to define expected behavior
 
-### 3. **Capturing Output**
-```php
-ob_start();
-$widget->render();
-$output = ob_get_clean();
-
-$this->assertStringContainsString('expected-content', $output);
-```
-
-### 4. **Testing Hooks and Filters**
-```php
-$this->assertTrue(has_action('wp_enqueue_scripts', 'my_function'));
-$this->assertEquals(10, has_filter('the_content', 'my_filter'));
-```
-
-## Troubleshooting
-
-### Common Issues:
-
-1. **"Class 'WP_UnitTestCase' not found"**
-   - Run WordPress test setup: `./bin/run-tests.sh --setup-wp`
-
-2. **Database connection errors**
-   - Check MySQL is running: `mysql -u root -p`
-   - Verify database exists: `SHOW DATABASES;`
-
-3. **"Brain\Monkey not found"**
-   - Install dependencies: `composer install`
-
-4. **Permission errors**
-   - Make scripts executable: `chmod +x bin/*.sh`
-
-### Debug Tips:
-
-1. **Enable debug output:**
-   ```php
-   define('WP_DEBUG', true);
-   define('WP_DEBUG_LOG', true);
-   ```
-
-2. **Use var_dump in tests:**
-   ```php
-   var_dump($actual_value);
-   $this->fail('Debug stop');
-   ```
-
-3. **Check test database:**
-   ```bash
-   mysql -u root -p wordpress_test
-   SHOW TABLES;
-   ```
+4. **Keep Tests Fast**
+   - Unit tests should run in milliseconds
+   - Avoid unnecessary database operations
 
 ## Continuous Integration
 
-The plugin includes GitHub Actions workflow (`.github/workflows/tests.yml`) that:
-- Runs tests on multiple PHP versions (7.4, 8.0, 8.1, 8.2)
-- Tests against multiple WordPress versions
-- Generates code coverage reports
-- Checks coding standards
+The plugin uses GitHub Actions for continuous integration:
 
-## Coverage Reports
+- Tests run automatically on push and pull requests
+- Multiple PHP versions are tested (7.4, 8.0, 8.1, 8.2)
+- Test results are reported in the GitHub interface
 
-After running tests with coverage:
-```bash
-./bin/run-tests.sh --coverage
+## Test Files Structure
+
+```
+tests/
+├── bootstrap-unit.php          # Unit test setup (no WordPress)
+├── bootstrap.php               # Integration test setup (with WordPress)
+├── TestCase.php                # Base test case class
+├── unit/
+│   ├── BasicTest.php           # Basic functionality tests
+│   ├── ComprehensiveTest.php   # Complete functionality tests
+│   ├── PluginFunctionsTest.php # Individual function tests
+│   └── WidgetFunctionalityTest.php # Widget-specific tests
+├── integration/
+│   ├── PluginIntegrationTest.php   # Plugin integration tests
+│   ├── FullIntegrationTest.php     # Complete workflow tests
+│   └── WidgetRenderingTest.php     # Widget rendering tests
+└── mocks/
+    ├── elementor-mock.php      # Elementor class mocks
+    └── gravity-forms-mock.php  # Gravity Forms class mocks
 ```
 
-Open `tests/coverage/html/index.html` in your browser to view detailed coverage reports.
+## Future Test Improvements
 
-## Contributing
+Areas for future test enhancement:
 
-When adding new features:
-1. Write tests first (TDD)
-2. Ensure all tests pass
-3. Maintain >80% code coverage
-4. Follow WordPress coding standards
+1. **Browser Testing**
+   - Test widget in actual Elementor editor
+   - Test form submission and validation
+
+2. **Performance Testing**
+   - Memory usage optimization
+   - Load time benchmarks
+
+3. **Accessibility Testing**
+   - WCAG compliance verification
+   - Screen reader compatibility
+
+4. **Compatibility Testing**
+   - Different WordPress versions
+   - Different Elementor versions
+   - Different Gravity Forms versions

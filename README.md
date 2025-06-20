@@ -1,18 +1,20 @@
 # Gravity Form Elementor Widget
 
-A WordPress plugin that adds a customizable widget for Gravity Forms to Elementor.
+A WordPress plugin that adds a customizable widget for Gravity Forms to Elementor, allowing you to seamlessly integrate and style Gravity Forms in your Elementor pages.
+
+## Features
+
+- **Form Settings Integration**: Inherit settings from Gravity Forms or selectively override them
+- **Extensive Styling Options**: Customize every aspect of your forms including inputs, labels, checkboxes, and more
+- **Custom Form Controls**: Show/hide title, description, use AJAX submissions, and more
+- **Advanced Styling**: Custom checkbox and radio button styling with visual controls
+- **Responsive Design**: Forms adapt beautifully to all screen sizes
+- **Developer-Friendly**: CSS classes for override states and debugging
 
 ## Requirements
 
-This plugin requires the following dependencies to be installed and activated:
-
-### Required Plugins
-
 - **Elementor** (version 3.0.0 or higher)
 - **Gravity Forms** (any version)
-
-### System Requirements
-
 - **PHP** version 7.4 or higher
 - **WordPress** (compatible with current versions)
 
@@ -23,38 +25,27 @@ This plugin requires the following dependencies to be installed and activated:
 3. Activate the plugin through the 'Plugins' screen in WordPress
 4. The Gravity Form widget will be available in Elementor under the "Impact Hub Elements" and "Gravity Forms" categories
 
-## Features
+## Usage
 
-- **Form Settings Integration**: Inherit settings from Gravity Forms or selectively override them
-- **Intelligent Customization**: Clear indicators when overriding form settings with educational notices
-- Customizable Gravity Forms widget for Elementor
-- Form selection dropdown populated with available Gravity Forms
-- Show/hide form title and description options
-- Ajax form submission support
-- **Enhanced Form Controls**: Label placement, description placement, sub-label placement overrides
-- **Advanced Settings**: Required indicators, validation summary, animation controls
-- Custom styling options for inputs, labels, and form elements
-- Custom checkbox and radio button styling
-- Fieldset visibility controls
-- **Developer-Friendly**: CSS classes for override states and debugging
+### Basic Usage
 
-## New: Form Settings Integration
+1. Edit a page with Elementor
+2. Add the "Gravity Form" widget to your page
+3. Select a form from the dropdown
+4. Configure display options (title, description, AJAX)
+5. Style your form using the available styling options
+6. Publish your page
 
-This plugin now includes powerful form settings integration that allows you to:
+### Form Settings Integration
 
-### **Inherit Form Settings**
+The plugin can inherit settings directly from your Gravity Forms:
 
-- Automatically use your Gravity Form's native settings (label placement, descriptions, etc.)
-- Maintain consistency across different pages and widgets
-- Reduce configuration time and potential conflicts
+1. Select your form in the widget
+2. Go to the "Form Settings Integration" section
+3. Enable "Inherit Form Settings"
+4. Optionally override specific settings as needed
 
-### **Selective Overrides**
-
-- Override specific settings while keeping others inherited
-- Clear visual indicators when settings are being overridden
-- Educational notices to help you understand the integration
-
-### **Supported Settings**
+### Available Form Settings Overrides
 
 - **Label Placement**: Above, left, or right of inputs
 - **Description Placement**: Above or below inputs
@@ -63,55 +54,42 @@ This plugin now includes powerful form settings integration that allows you to:
 - **Validation Summary**: Show/hide error summary at form top
 - **Animations**: Enable/disable conditional logic animations
 
-See `FORM_SETTINGS_INTEGRATION.md` for detailed documentation.
+### Styling Options
 
-## Dependency Checks
+The widget provides extensive styling controls for:
+
+- **Inputs**: Padding, margins, borders, colors, typography
+- **Labels**: Position, display, margins, typography
+- **Checkboxes & Radio Buttons**: Custom styling with visual controls
+- **Submit Button**: Full styling control
+- **Sections**: Style section headers and dividers
+- **Consent Fields**: Special styling for consent checkboxes
+- **Fieldsets**: Show/hide fieldset borders
+
+## Understanding Label Controls
+
+The widget provides two different ways to control labels:
+
+1. **Label Placement** (Form Settings): Controls the structural layout (above, left, right)
+2. **Label Display** (Styling): Controls the CSS display property
+
+For best results:
+- Use "Label Placement" to control the overall layout
+- Use "Auto" for Label Display unless you need specific CSS behavior
+- When overriding form settings, the widget will show helpful notices
+
+## Dependency Handling
 
 The plugin includes comprehensive dependency checking:
 
-- **Automatic Detection**: The plugin automatically detects if required dependencies are missing
-- **Admin Notices**: Clear warning messages are displayed in the WordPress admin if dependencies are not met
-- **Graceful Degradation**: The plugin will not load its functionality if dependencies are missing, preventing errors
-- **Version Compatibility**: Checks for minimum required versions of Elementor and PHP
-
-## Error Handling
-
-If dependencies are missing, users will see:
-
-- Admin notices explaining which plugins need to be installed
-- Error messages in the Elementor editor if forms cannot be loaded
-- Helpful guidance on resolving dependency issues
-
-## Usage
-
-1. Edit a page with Elementor
-2. Add the "Gravity Form" widget to your page
-3. Select a form from the dropdown
-4. **New**: Enable "Inherit Form Settings" to use your form's native configuration
-5. **New**: Optionally override specific settings as needed (clear indicators will show what's overridden)
-6. Customize the appearance using the available styling options
-7. Publish your page
+- Automatically detects if required dependencies are missing
+- Displays clear warning messages if dependencies are not met
+- Prevents errors by not loading functionality if dependencies are missing
+- Checks for minimum required versions of Elementor and PHP
 
 ## Testing
 
-This plugin includes comprehensive unit tests to ensure reliability and functionality.
-
-### Quick Test
-
-```bash
-vendor/bin/phpunit -c phpunit-unit.xml --filter "BasicTest|ComprehensiveTest"
-```
-
-**Expected:** `OK (25 tests, 104 assertions)`
-
-### Test Coverage
-
-- ✅ Plugin core functionality (dependency checking, version compatibility)
-- ✅ Widget functionality (properties, settings, inheritance)
-- ✅ WordPress integration (hooks, styles, functions)
-- ✅ Gravity Forms integration (GFAPI, form retrieval)
-
-See `TEST_SUMMARY.md` for complete test documentation and `QUICK_TEST_GUIDE.md` for testing instructions.
+This plugin includes comprehensive unit and integration tests. For developers interested in contributing or modifying the plugin, see [TESTING.md](TESTING.md) for detailed testing instructions.
 
 ## Support
 
@@ -119,23 +97,11 @@ For support and feature requests, please contact support@impacthub.net.
 
 ## Changelog
 
-### Version 1.1.0 (Latest)
-
-- **NEW**: Form Settings Integration - Inherit or override Gravity Forms settings
-- **NEW**: Selective override system with clear visual indicators
-- **NEW**: Support for label placement, description placement, and sub-label placement overrides
-- **NEW**: Required indicator customization (text, asterisk, custom)
-- **NEW**: Validation summary and animation setting overrides
-- **NEW**: Educational notices and override indicators in Elementor editor
-- **NEW**: CSS classes for debugging and advanced styling
-- Enhanced user experience with better guidance and explanations
-- Improved backward compatibility - existing widgets continue to work unchanged
-- Added comprehensive documentation for new features
-
-### Version 1.0.2
+### Version 1.0.2 (Current)
 
 - Added comprehensive dependency checking for Elementor and Gravity Forms
 - Improved error handling and user feedback
 - Enhanced security with proper input sanitization
 - Added graceful degradation when dependencies are missing
 - Improved code organization and documentation
+- Added extensive test coverage for reliability
