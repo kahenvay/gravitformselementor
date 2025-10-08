@@ -2446,7 +2446,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
     <?php echo do_shortcode( '[gravityform id="' . esc_attr( $settings['gravity_form'] ) . '" title="' . esc_attr( $show_title ) . '" description="' . esc_attr( $show_description ) . '" ajax="' . esc_attr( $use_ajax ) . '"]' ); ?>
 </div>
 
-<?php if ( $settings['label_display'] === 'auto' ): ?>
+<?php if ( isset( $settings['label_display'] ) && $settings['label_display'] === 'auto' ): ?>
 <script>
 // Handle auto label display based on label placement
 (function() {
