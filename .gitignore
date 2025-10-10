@@ -111,3 +111,6 @@ local-config.php
 *.sql
 *.sqlite
 *.db
+
+ih-old-widgets-readme-gravity-forms-section.md
+ih-widgets-readme.md

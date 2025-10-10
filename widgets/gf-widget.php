@@ -153,20 +153,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-        // Form Settings Integration Notice
-        $this->add_control(
-            'form_settings_notice',
-            [
-                'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw' => '<div style="background: #e8f4fd; padding: 10px; border-left: 3px solid #0073aa; margin: 10px 0;">
-                    <strong>' . esc_html__( 'Form Settings Integration', 'elementor-addon' ) . '</strong><br>
-                    ' . esc_html__( 'This widget can inherit settings from your Gravity Form or allow you to override them. When you override a setting, it will be clearly marked.', 'elementor-addon' ) . '
-                </div>',
-                'condition' => [
-                    'gravity_form!' => '',
-                ],
-            ]
-        );
+        
 
         $this->add_control(
 			'show_title',
@@ -250,108 +237,9 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-        // Notice about form settings integration
-        $this->add_control(
-            'label_styling_notice',
-            [
-                'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw' => '<div style="background: #e8f4fd; padding: 8px; border-left: 3px solid #0073aa; margin: 8px 0; font-size: 11px;">
-                    <strong>' . esc_html__( 'Label Placement vs Display:', 'elementor-addon' ) . '</strong><br>' .
-                    esc_html__( '• Label Placement (above) controls the layout structure (above, left, right of inputs)', 'elementor-addon' ) . '<br>' .
-                    esc_html__( '• Label Display (below) controls the CSS display property (block, inline, etc.)', 'elementor-addon' ) . '<br>' .
-                    esc_html__( '• Use "Auto" for Label Display unless you need specific CSS behavior', 'elementor-addon' ) . '
-                </div>',
-                'condition' => [
-                    'gravity_form!' => '',
-                ],
-            ]
-        );
 
-        $this->add_control(
-            'label_integration_notice',
-            [
-                'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw' => '<div style="background: #fff3cd; padding: 8px; border-left: 3px solid #ffc107; margin: 8px 0; font-size: 11px;">
-                    <strong>' . esc_html__( 'Form Settings Integration:', 'elementor-addon' ) . '</strong> ' .
-                    esc_html__( 'Label placement is currently controlled by your Gravity Form settings. Enable "Override Label Placement" above to customize it.', 'elementor-addon' ) . '
-                </div>',
-                'condition' => [
-                    'gravity_form!' => '',
-                    'inherit_form_settings' => 'yes',
-                    'override_label_placement!' => 'yes',
-                ],
-            ]
-        );
 
-        $this->add_control(
-			'label_display',
-			[
-				'label' => esc_html__( 'Label Display', 'textdomain' ),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'default' => 'auto',
-                'options' => [
-                    'auto' => esc_html__( 'Auto (Recommended)', 'elementor-addon' ),
-                    'none' => esc_html__( 'None (Hide Labels)', 'elementor-pro' ),
-                    'block' => esc_html__( 'Block', 'elementor-pro' ),
-                    'inline-block' => esc_html__( 'Inline-Block', 'elementor-pro' ),
-                    'inline' => esc_html__( 'Inline', 'elementor-pro' ),
-                    'flex' => esc_html__( 'Flex', 'elementor-pro' ),
-                    'inline-flex' => esc_html__( 'Inline-flex', 'elementor-pro' ),
-                ],
-                'separator' => 'before',
-                'selectors' => [
-                    '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'display: {{VALUE}};',
-                ],
-                // 'condition' => [
-                //     'label_display!' => 'auto',
-                // ],
-                'description' => esc_html__( 'Override the CSS display property for labels. "Auto" uses the optimal display based on label placement. Only change this if you need specific display behavior.', 'elementor-addon' ),
-			]
-		);
 
-        $this->add_control(
-			'label_margin',
-			[
-				'label' => esc_html__( 'Label margin', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-				'default' => [
-					'top' => 0,
-					'right' => 0,
-					'bottom' => 14.4,
-					'left' => 0,
-					'unit' => 'px',
-					'isLinked' => false,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .gform_wrapper  label:not(.gform-field-label--type-inline)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-                'condition' => [
-                    'label_display!' => 'none',
-                ],
-			]
-		);
-
-        $this->add_control(
-			'sub_label_display',
-			[
-				'label' => esc_html__( 'Sub Label Display', 'textdomain' ),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'default' => 'none',
-                'options' => [
-                    'none' => esc_html__( 'None', 'elementor-pro' ),
-                    'block' => esc_html__( 'Block', 'elementor-pro' ),
-                    'inline-block' => esc_html__( 'Inline-Block', 'elementor-pro' ),
-                    'inline' => esc_html__( 'Inline', 'elementor-pro' ),
-                    'flex' => esc_html__( 'Flex', 'elementor-pro' ),
-                    'inline-flex' => esc_html__( 'Inline-flex', 'elementor-pro' ),
-                ],
-                'separator' => 'before',
-                'selectors' => [
-                    '{{WRAPPER}} .gform_wrapper .gform-field-label.gform-field-label--type-sub' => 'display: {{VALUE}};',
-                ],
-			]
-		);
 
         
 
@@ -377,6 +265,21 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        // Form Settings Integration Notice
+        $this->add_control(
+            'form_settings_notice',
+            [
+                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'raw' => '<p style="margin: 10px 0; font-size: 12px; line-height: 1.4;">
+                    <strong>' . esc_html__( 'Form Settings Integration', 'elementor-addon' ) . '</strong><br>
+                    ' . esc_html__( 'This widget can inherit settings from your Gravity Form or allow you to override them. When you override a setting, it will be clearly marked.', 'elementor-addon' ) . '
+                </p>',
+                'condition' => [
+                    'gravity_form!' => '',
+                ],
+            ]
+        );
+
         // Master toggle for inheriting form settings
         $this->add_control(
             'inherit_form_settings',
@@ -388,6 +291,29 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'return_value' => 'yes',
                 'default' => 'yes',
                 'description' => esc_html__( 'When enabled, the widget will use settings from your Gravity Form. You can still override individual settings below.', 'elementor-addon' ),
+            ]
+        );
+
+        // Label Placement vs Display explanation
+        $this->add_control(
+            'label_styling_notice',
+            [
+                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'raw' => '<p style="    color: var(--e-a-color-txt-muted);
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.4;">
+                    <strong>' . esc_html__( 'Label Placement vs Display:', 'elementor-addon' ) . '</strong><br>' .
+                    esc_html__( '• Label Placement controls the layout structure (above, left, right of inputs)', 'elementor-addon' ) . '<br>' .
+                    esc_html__( '• Label Display controls the CSS display property (block, inline, etc.)', 'elementor-addon' ) . '<br>' .
+                    esc_html__( '• Sub-Label Display affects fields with multiple inputs (Name, Address, etc.)', 'elementor-addon' ) . '<br>' .
+                    esc_html__( '• Use "Auto" for Label Display unless you need specific CSS behavior', 'elementor-addon' ) . '
+                </p>',
+                'condition' => [
+                    'gravity_form!' => '',
+                    'inherit_form_settings' => 'yes',
+                ],
+                'separator' => 'before',
             ]
         );
 
@@ -424,6 +350,120 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 ],
             ]
         );
+
+        // Label Display Override
+        $this->add_control(
+            'override_label_display',
+            [
+                'label' => esc_html__( 'Override Label Display', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'elementor-addon' ),
+                'label_off' => esc_html__( 'No', 'elementor-addon' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'separator' => 'before',
+                'condition' => [
+                    'inherit_form_settings' => 'yes',
+                ],
+            ]
+        );
+
+        
+
+        $this->add_control(
+			'label_display',
+			[
+				'label' => esc_html__( 'Label Display', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'auto',
+                'options' => [
+                    'auto' => esc_html__( 'Auto (Recommended)', 'elementor-addon' ),
+                    'none' => esc_html__( 'None (Hide Labels)', 'elementor-addon' ),
+                    'block' => esc_html__( 'Block', 'elementor-addon' ),
+                    'inline-block' => esc_html__( 'Inline-Block', 'elementor-addon' ),
+                    'inline' => esc_html__( 'Inline', 'elementor-addon' ),
+                    'flex' => esc_html__( 'Flex', 'elementor-addon' ),
+                    'inline-flex' => esc_html__( 'Inline-flex', 'elementor-addon' ),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'display: {{VALUE}};',
+                ],
+                'description' => esc_html__( 'Override the CSS display property for labels. "Auto" uses the optimal display based on label placement. Only change this if you need specific display behavior.', 'elementor-addon' ),
+                'condition' => [
+                    'inherit_form_settings' => 'yes',
+                    'override_label_display' => 'yes',
+                ],
+			]
+		);
+
+        $this->add_control(
+			'label_margin',
+			[
+				'label' => esc_html__( 'Label Margin', 'elementor-addon' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 14.4,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gform_wrapper label:not(.gform-field-label--type-inline)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+                'condition' => [
+                    'inherit_form_settings' => 'yes',
+                    'override_label_display' => 'yes',
+                    'label_display!' => 'none',
+                ],
+			]
+		);
+
+        // Sub-Label Display Override
+        $this->add_control(
+            'override_sublabel_display',
+            [
+                'label' => esc_html__( 'Override Sub-Label Display', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'elementor-addon' ),
+                'label_off' => esc_html__( 'No', 'elementor-addon' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'separator' => 'before',
+                'description' => esc_html__( 'Affects fields with multiple inputs like Name fields', 'elementor-addon' ),
+                'condition' => [
+                    'inherit_form_settings' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'sub_label_display',
+			[
+				'label' => esc_html__( 'Sub-Label Display', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => esc_html__( 'None', 'elementor-addon' ),
+                    'block' => esc_html__( 'Block', 'elementor-addon' ),
+                    'inline-block' => esc_html__( 'Inline-Block', 'elementor-addon' ),
+                    'inline' => esc_html__( 'Inline', 'elementor-addon' ),
+                    'flex' => esc_html__( 'Flex', 'elementor-addon' ),
+                    'inline-flex' => esc_html__( 'Inline-flex', 'elementor-addon' ),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gform-field-label.gform-field-label--type-sub' => 'display: {{VALUE}};',
+                ],
+                'condition' => [
+                    'inherit_form_settings' => 'yes',
+                    'override_sublabel_display' => 'yes',
+                ],
+			]
+		);
+
+        
 
         // Description Placement Override
         $this->add_control(
@@ -2327,12 +2367,20 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 $classes[] = 'gf-widget-override-labels';
             }
 
+            if ( $settings['override_label_display'] === 'yes' ) {
+                $classes[] = 'gf-widget-override-label-display';
+            }
+
             if ( $settings['override_description_placement'] === 'yes' ) {
                 $classes[] = 'gf-widget-override-descriptions';
             }
 
             if ( $settings['override_sublabel_placement'] === 'yes' ) {
                 $classes[] = 'gf-widget-override-sublabels';
+            }
+
+            if ( $settings['override_sublabel_display'] === 'yes' ) {
+                $classes[] = 'gf-widget-override-sublabel-display';
             }
 
             if ( $settings['override_required_indicator'] === 'yes' ) {
@@ -2415,28 +2463,52 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
 
 
-        <?php if ( $settings['inherit_form_settings'] === 'yes' && ! empty( $override_classes ) ): ?>
+        <?php if ( $settings['inherit_form_settings'] === 'yes' ): ?>
             <!-- Form Settings Override Notice (only visible in editor) -->
             <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
                 <div class="gf-widget-override-notice" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 12px;">
-                    <strong><?php esc_html_e( 'Form Settings Overrides Active:', 'elementor-addon' ); ?></strong><br>
-                    <?php if ( $settings['override_label_placement'] === 'yes' ): ?>
-                        • <?php esc_html_e( 'Label Placement', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['label_placement_override'] ); ?><br>
-                    <?php endif; ?>
-                    <?php if ( $settings['override_description_placement'] === 'yes' ): ?>
-                        • <?php esc_html_e( 'Description Placement', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['description_placement_override'] ); ?><br>
-                    <?php endif; ?>
-                    <?php if ( $settings['override_sublabel_placement'] === 'yes' ): ?>
-                        • <?php esc_html_e( 'Sub-Label Placement', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['sublabel_placement_override'] ); ?><br>
-                    <?php endif; ?>
-                    <?php if ( $settings['override_required_indicator'] === 'yes' ): ?>
-                        • <?php esc_html_e( 'Required Indicator', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['required_indicator_override'] ); ?><br>
-                    <?php endif; ?>
-                    <?php if ( $settings['override_validation_summary'] === 'yes' ): ?>
-                        • <?php esc_html_e( 'Validation Summary', 'elementor-addon' ); ?>: <?php echo $settings['validation_summary_override'] === 'yes' ? esc_html__( 'Enabled', 'elementor-addon' ) : esc_html__( 'Disabled', 'elementor-addon' ); ?><br>
-                    <?php endif; ?>
-                    <?php if ( $settings['override_animation'] === 'yes' ): ?>
-                        • <?php esc_html_e( 'Animations', 'elementor-addon' ); ?>: <?php echo $settings['animation_override'] === 'yes' ? esc_html__( 'Enabled', 'elementor-addon' ) : esc_html__( 'Disabled', 'elementor-addon' ); ?><br>
+                    <?php 
+                    // Check if any actual overrides are active (not just the base inherit class)
+                    $has_overrides = (
+                        $settings['override_label_placement'] === 'yes' ||
+                        $settings['override_label_display'] === 'yes' ||
+                        $settings['override_description_placement'] === 'yes' ||
+                        $settings['override_sublabel_placement'] === 'yes' ||
+                        $settings['override_sublabel_display'] === 'yes' ||
+                        $settings['override_required_indicator'] === 'yes' ||
+                        $settings['override_validation_summary'] === 'yes' ||
+                        $settings['override_animation'] === 'yes'
+                    );
+                    ?>
+                    <?php if ( $has_overrides ): ?>
+                        <strong><?php esc_html_e( 'Form Settings Overrides Active:', 'elementor-addon' ); ?></strong><br>
+                        <?php if ( $settings['override_label_placement'] === 'yes' ): ?>
+                            • <?php esc_html_e( 'Label Placement', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['label_placement_override'] ); ?><br>
+                        <?php endif; ?>
+                        <?php if ( $settings['override_label_display'] === 'yes' ): ?>
+                            • <?php esc_html_e( 'Label Display', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['label_display'] ); ?><br>
+                        <?php endif; ?>
+                        <?php if ( $settings['override_description_placement'] === 'yes' ): ?>
+                            • <?php esc_html_e( 'Description Placement', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['description_placement_override'] ); ?><br>
+                        <?php endif; ?>
+                        <?php if ( $settings['override_sublabel_placement'] === 'yes' ): ?>
+                            • <?php esc_html_e( 'Sub-Label Placement', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['sublabel_placement_override'] ); ?><br>
+                        <?php endif; ?>
+                        <?php if ( $settings['override_sublabel_display'] === 'yes' ): ?>
+                            • <?php esc_html_e( 'Sub-Label Display', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['sub_label_display'] ); ?><br>
+                        <?php endif; ?>
+                        <?php if ( $settings['override_required_indicator'] === 'yes' ): ?>
+                            • <?php esc_html_e( 'Required Indicator', 'elementor-addon' ); ?>: <?php echo esc_html( $settings['required_indicator_override'] ); ?><br>
+                        <?php endif; ?>
+                        <?php if ( $settings['override_validation_summary'] === 'yes' ): ?>
+                            • <?php esc_html_e( 'Validation Summary', 'elementor-addon' ); ?>: <?php echo $settings['validation_summary_override'] === 'yes' ? esc_html__( 'Enabled', 'elementor-addon' ) : esc_html__( 'Disabled', 'elementor-addon' ); ?><br>
+                        <?php endif; ?>
+                        <?php if ( $settings['override_animation'] === 'yes' ): ?>
+                            • <?php esc_html_e( 'Animations', 'elementor-addon' ); ?>: <?php echo $settings['animation_override'] === 'yes' ? esc_html__( 'Enabled', 'elementor-addon' ) : esc_html__( 'Disabled', 'elementor-addon' ); ?><br>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <strong><?php esc_html_e( 'Form Settings Integration Active:', 'elementor-addon' ); ?></strong><br>
+                        <em><?php esc_html_e( 'No overrides selected yet - using form defaults', 'elementor-addon' ); ?></em>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
