@@ -1655,7 +1655,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'consent_margin',
 			[
-				'label' => esc_html__( 'Consent margin', 'textdomain' ),
+				'label' => esc_html__( 'Consent Field Margin', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
@@ -1672,25 +1672,25 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-		// $this->add_control(
-		// 	'consent_padding',
-		// 	[
-		// 		'label' => esc_html__( 'Wrapper padding ', 'textdomain' ),
-		// 		'type' => \Elementor\Controls_Manager::DIMENSIONS,
-		// 		'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-		// 		'default' => [
-		// 			'top' => 0,
-		// 			'right' => 0,
-		// 			'bottom' => 0,
-		// 			'left' => 0,
-		// 			'unit' => 'px',
-		// 			'isLinked' => false,
-		// 		],
-		// 		'selectors' => [
-		// 			'{{WRAPPER}} .gform_wrapper .gfield--type-consent' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'consent_padding',
+			[
+				'label' => esc_html__( 'Consent Field Padding', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 0,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gform_wrapper .gfield--type-consent' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
 		
 
@@ -1802,7 +1802,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'checkbox_margin',
 			[
-				'label' => esc_html__( 'Checkbox margin', 'textdomain' ),
+				'label' => esc_html__( 'Checkbox Field Margin', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
@@ -1818,6 +1818,68 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'checkbox_padding',
+			[
+				'label' => esc_html__( 'Checkbox Field Padding', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 0,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gform_wrapper .gfield--type-checkbox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'checkbox_item_margin',
+			[
+				'label' => esc_html__( 'Individual Checkbox Margin', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 8,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gform_wrapper .gfield--type-checkbox .gchoice' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'description' => esc_html__( 'Controls spacing between individual checkbox options', 'textdomain' ),
+			]
+		);
+
+		// $this->add_control(
+		// 	'checkbox_item_padding',
+		// 	[
+		// 		'label' => esc_html__( 'Individual Checkbox Padding', 'textdomain' ),
+		// 		'type' => \Elementor\Controls_Manager::DIMENSIONS,
+		// 		'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+		// 		'default' => [
+		// 			'top' => 0,
+		// 			'right' => 0,
+		// 			'bottom' => 0,
+		// 			'left' => 0,
+		// 			'unit' => 'px',
+		// 			'isLinked' => false,
+		// 		],
+		// 		'selectors' => [
+		// 			'{{WRAPPER}} .gform_wrapper .gfield--type-checkbox .gchoice' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		// 		],
+		// 		'description' => esc_html__( 'Controls padding within individual checkbox options', 'textdomain' ),
+		// 	]
+		// );
 
 	
 		$this->add_group_control(
@@ -1958,7 +2020,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'radio_margin',
 			[
-				'label' => esc_html__( 'Radio margin', 'textdomain' ),
+				'label' => esc_html__( 'Radio Field Margin', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'default' => [
@@ -1974,6 +2036,68 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'radio_padding',
+			[
+				'label' => esc_html__( 'Radio Field Padding', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 0,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gform_wrapper .gfield--type-radio' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'radio_item_margin',
+			[
+				'label' => esc_html__( 'Individual Radio Margin', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 0,
+					'right' => 0,
+					'bottom' => 8,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gform_wrapper .gfield--type-radio .gchoice' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'description' => esc_html__( 'Controls spacing between individual radio button options', 'textdomain' ),
+			]
+		);
+
+		// $this->add_control(
+		// 	'radio_item_padding',
+		// 	[
+		// 		'label' => esc_html__( 'Individual Radio Padding', 'textdomain' ),
+		// 		'type' => \Elementor\Controls_Manager::DIMENSIONS,
+		// 		'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+		// 		'default' => [
+		// 			'top' => 0,
+		// 			'right' => 0,
+		// 			'bottom' => 0,
+		// 			'left' => 0,
+		// 			'unit' => 'px',
+		// 			'isLinked' => false,
+		// 		],
+		// 		'selectors' => [
+		// 			'{{WRAPPER}} .gform_wrapper .gfield--type-radio .gchoice' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		// 		],
+		// 		'description' => esc_html__( 'Controls padding within individual radio button options', 'textdomain' ),
+		// 	]
+		// );
 
 	
 		$this->add_group_control(
