@@ -219,6 +219,7 @@ class WidgetFunctionalityTest extends TestCase {
             'register_main_controls',
             'register_form_settings_controls',
             'register_advanced_form_settings_controls',
+            'register_submit_layout_controls',
             'register_label_controls'
         ];
         
@@ -257,6 +258,70 @@ class WidgetFunctionalityTest extends TestCase {
         $this->assertArrayHasKey($selector, $controls['label_padding']['selectors']);
         $this->assertEquals($selector, $controls['label_border']['selector']);
         $this->assertEquals($selector, $controls['label_typography']['selector']);
+    }
+
+    /**
+     * Test submit layout controls and the Gravity Forms position override.
+     */
+    public function test_submit_button_layout_controls_and_override() {
+        $reflection = new \ReflectionClass($this->widget);
+
+        foreach (['register_submit_layout_controls', 'register_submit_controls'] as $method_name) {
+            $method = $reflection->getMethod($method_name);
+            $method->setAccessible(true);
+            $method->invoke($this->widget);
+        }
+
+        $controls = $this->widget->get_registered_controls();
+
+        foreach ([
+            'override_submit_layout',
+            'submit_position_override',
+            'submit_width',
+            'submit_alignment'
+        ] as $control) {
+            $this->assertArrayHasKey($control, $controls);
+        }
+
+        $this->assertArrayHasKey('inline', $controls['submit_position_override']['options']);
+        $this->assertArrayHasKey('bottom', $controls['submit_position_override']['options']);
+        $this->assertArrayHasKey('{{WRAPPER}} .gform_wrapper .gform_button', $controls['submit_width']['selectors']);
+
+        $method = $reflection->getMethod('modify_form_settings');
+        $method->setAccessible(true);
+        $form = $method->invoke($this->widget, [
+            'id' => '1',
+            'button' => [
+                'location' => 'bottom',
+            ],
+        ], [
+            'override_submit_layout' => 'yes',
+            'submit_position_override' => 'inline',
+        ]);
+
+        $this->assertEquals('inline', $form['button']['location']);
+
+        global $mock_filters;
+        $mock_filters = [];
+        $method = $reflection->getMethod('apply_form_settings_overrides');
+        $method->setAccessible(true);
+        $method->invoke($this->widget, [
+            'gravity_form' => '1',
+            'override_submit_layout' => 'yes',
+            'submit_position_override' => 'inline',
+        ]);
+
+        $this->assertArrayHasKey('gform_pre_render', $mock_filters);
+        $this->assertEquals(9, $mock_filters['gform_pre_render'][0]['priority']);
+        $this->assertArrayHasKey('gform_pre_render_1', $mock_filters);
+
+        $form = $mock_filters['gform_pre_render'][0]['function']([
+            'id' => '1',
+            'button' => [
+                'location' => 'bottom',
+            ],
+        ]);
+        $this->assertEquals('inline', $form['button']['location']);
     }
 
     /**

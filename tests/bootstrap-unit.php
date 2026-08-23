@@ -73,6 +73,21 @@ if (!function_exists('add_action')) {
     }
 }
 
+if (!function_exists('add_filter')) {
+    function add_filter($hook, $function, $priority = 10, $accepted_args = 1) {
+        global $mock_filters;
+        if (!isset($mock_filters[$hook])) {
+            $mock_filters[$hook] = [];
+        }
+        $mock_filters[$hook][] = [
+            'function' => $function,
+            'priority' => $priority,
+            'accepted_args' => $accepted_args,
+        ];
+        return true;
+    }
+}
+
 if (!function_exists('wp_register_style')) {
     function wp_register_style($handle, $src, $deps = array(), $ver = false, $media = 'all') {
         global $mock_registered_styles;

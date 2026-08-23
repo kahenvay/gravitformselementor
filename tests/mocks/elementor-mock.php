@@ -58,6 +58,7 @@ namespace Elementor {
             const SELECT = 'select';
             const SWITCHER = 'switcher';
             const DIMENSIONS = 'dimensions';
+            const SLIDER = 'slider';
             const RAW_HTML = 'raw_html';
             const COLOR = 'color';
         }

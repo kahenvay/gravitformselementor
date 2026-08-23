@@ -645,6 +645,68 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
     }
 
     /**
+     * Register controls that can override the submit button layout set in
+     * Gravity Forms without changing the saved form configuration.
+     */
+    protected function register_submit_layout_controls(){
+        $this->start_controls_section(
+            'submit_layout_section',
+            [
+                'label' => esc_html__( 'Submit Button Layout', 'elementor-addon' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+                'condition' => [
+                    'gravity_form!' => '',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'override_submit_layout',
+            [
+                'label' => esc_html__( 'Override Submit Button Layout', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'elementor-addon' ),
+                'label_off' => esc_html__( 'No', 'elementor-addon' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'description' => esc_html__( 'Keep this disabled to use the submit button position configured in Gravity Forms.', 'elementor-addon' ),
+            ]
+        );
+
+        $this->add_control(
+            'submit_layout_override_notice',
+            [
+                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'raw' => '<p style="color: var(--e-a-color-warning); font-size: 11px; line-height: 1.4; margin: 0;"><strong>' . esc_html__( 'Gravity Forms override:', 'elementor-addon' ) . '</strong> ' . esc_html__( 'Any position selected here—and width or alignment selected under Submit Styling—applies only to this widget and takes precedence over the submit button layout selected in Gravity Forms.', 'elementor-addon' ) . '</p>',
+                'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
+                'condition' => [
+                    'override_submit_layout' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'submit_position_override',
+            [
+                'label' => esc_html__( 'Button Position', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__( 'Use Gravity Forms Setting', 'elementor-addon' ),
+                    'bottom' => esc_html__( 'Bottom of Form', 'elementor-addon' ),
+                    'inline' => esc_html__( 'Inline with Form Fields', 'elementor-addon' ),
+                ],
+                'description' => esc_html__( 'Changes where Gravity Forms renders the submit button for this widget only.', 'elementor-addon' ),
+                'condition' => [
+                    'override_submit_layout' => 'yes',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    /**
      * Register visual styling controls for primary field labels.
      *
      * Label placement and display remain form-structure settings above. These
@@ -1412,6 +1474,53 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
+
+        $this->add_responsive_control(
+            'submit_width',
+            [
+                'label' => esc_html__( 'Button Width', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 5,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gform_button' => 'width: {{SIZE}}{{UNIT}} !important; inline-size: {{SIZE}}{{UNIT}} !important;',
+                ],
+                'condition' => [
+                    'override_submit_layout' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'submit_alignment',
+            [
+                'label' => esc_html__( 'Button Alignment', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__( 'Use Gravity Forms Setting', 'elementor-addon' ),
+                    'flex-start' => esc_html__( 'Start', 'elementor-addon' ),
+                    'center' => esc_html__( 'Center', 'elementor-addon' ),
+                    'flex-end' => esc_html__( 'End', 'elementor-addon' ),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gform_footer, {{WRAPPER}} .gform_wrapper .gform_page_footer, {{WRAPPER}} .gform_wrapper #field_submit' => 'display: flex !important; justify-content: {{VALUE}} !important;',
+                ],
+                'condition' => [
+                    'override_submit_layout' => 'yes',
+                ],
+            ]
+        );
         
 		$this->add_control(
 			'submit_margin',
@@ -1428,7 +1537,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gform_wrapper .gform_footer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .gform_footer, {{WRAPPER}} .gform_wrapper #field_submit' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1448,7 +1557,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gform_wrapper input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper .gform_button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1458,7 +1567,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'submit_border',
 				'separator' => 'before',
-				'selector' => '{{WRAPPER}} .gform_wrapper input[type="submit"]',
+				'selector' => '{{WRAPPER}} .gform_wrapper .gform_button',
 			]
 		);
 
@@ -1477,7 +1586,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gform_wrapper input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .gform_wrapper .gform_button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -1490,7 +1599,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'global' => [
 
                 ],
-                'selector' => '{{WRAPPER}} .gform_wrapper input[type="submit"]',
+                'selector' => '{{WRAPPER}} .gform_wrapper .gform_button',
             ]
         );
 
@@ -1504,7 +1613,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gform_wrapper input[type="submit"]' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .gform_button' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1518,7 +1627,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gform_wrapper input[type="submit"]' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .gform_wrapper .gform_button' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -2443,6 +2552,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		$this->register_main_controls();
         $this->register_form_settings_controls();
         $this->register_advanced_form_settings_controls();
+        $this->register_submit_layout_controls();
         $this->register_label_controls();
         $this->register_input_controls();
         $this->register_emails_controls();
@@ -2463,12 +2573,28 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
      * This method modifies the form object before rendering to apply widget overrides
      */
     protected function apply_form_settings_overrides( $settings ) {
-        // Only apply overrides if form settings integration is enabled
-        if ( $settings['inherit_form_settings'] !== 'yes' ) {
+        $uses_form_settings_integration = isset( $settings['inherit_form_settings'] ) && $settings['inherit_form_settings'] === 'yes';
+        $has_submit_position_override = isset( $settings['override_submit_layout'], $settings['submit_position_override'] )
+            && $settings['override_submit_layout'] === 'yes'
+            && in_array( $settings['submit_position_override'], array( 'bottom', 'inline' ), true );
+
+        if ( ! $uses_form_settings_integration && ! $has_submit_position_override ) {
             return;
         }
 
         $form_id = $settings['gravity_form'];
+
+        // Gravity Forms adds an inline submit field on its base pre-render hook
+        // at priority 100. Apply this override earlier so it can place that field.
+        if ( $has_submit_position_override ) {
+            add_filter( 'gform_pre_render', function( $form ) use ( $settings, $form_id ) {
+                if ( empty( $form['id'] ) || (string) $form['id'] !== (string) $form_id ) {
+                    return $form;
+                }
+
+                return $this->modify_form_settings( $form, $settings );
+            }, 9 );
+        }
 
         // Hook into Gravity Forms to modify form settings
         add_filter( 'gform_pre_render_' . $form_id, function( $form ) use ( $settings ) {
@@ -2488,7 +2614,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
         });
 
         // Handle required indicator override with field content filter
-        if ( $settings['override_required_indicator'] === 'yes' && ! empty( $settings['required_indicator_override'] ) ) {
+        if ( $uses_form_settings_integration && isset( $settings['override_required_indicator'] ) && $settings['override_required_indicator'] === 'yes' && ! empty( $settings['required_indicator_override'] ) ) {
             add_filter( 'gform_field_content_' . $form_id, function( $content, $field, $value, $lead_id, $form_id ) use ( $settings ) {
                 return $this->modify_required_indicator_content( $content, $field, $settings );
             }, 10, 5 );
@@ -2500,31 +2626,43 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
      */
     protected function modify_form_settings( $form, $settings ) {
         // Apply label placement override
-        if ( $settings['override_label_placement'] === 'yes' && ! empty( $settings['label_placement_override'] ) ) {
+        if ( isset( $settings['override_label_placement'] ) && $settings['override_label_placement'] === 'yes' && ! empty( $settings['label_placement_override'] ) ) {
             $form['labelPlacement'] = $settings['label_placement_override'];
         }
 
         // Apply description placement override
-        if ( $settings['override_description_placement'] === 'yes' && ! empty( $settings['description_placement_override'] ) ) {
+        if ( isset( $settings['override_description_placement'] ) && $settings['override_description_placement'] === 'yes' && ! empty( $settings['description_placement_override'] ) ) {
             $form['descriptionPlacement'] = $settings['description_placement_override'];
         }
 
         // Apply sub-label placement override
-        if ( $settings['override_sublabel_placement'] === 'yes' && ! empty( $settings['sublabel_placement_override'] ) ) {
+        if ( isset( $settings['override_sublabel_placement'] ) && $settings['override_sublabel_placement'] === 'yes' && ! empty( $settings['sublabel_placement_override'] ) ) {
             $form['subLabelPlacement'] = $settings['sublabel_placement_override'];
+        }
+
+        // Gravity Forms uses this setting to render the button in its footer or
+        // as an inline submit field. It is changed only for this widget render.
+        if ( isset( $settings['override_submit_layout'], $settings['submit_position_override'] )
+            && $settings['override_submit_layout'] === 'yes'
+            && in_array( $settings['submit_position_override'], array( 'bottom', 'inline' ), true ) ) {
+            if ( empty( $form['button'] ) || ! is_array( $form['button'] ) ) {
+                $form['button'] = array();
+            }
+
+            $form['button']['location'] = $settings['submit_position_override'];
         }
 
         // Note: Required indicator override is handled separately via gform_field_content filter
         // This is because the required indicator content is generated during field rendering
 
         // Apply validation summary override
-        if ( $settings['override_validation_summary'] === 'yes' ) {
-            $form['validationSummary'] = $settings['validation_summary_override'] === 'yes';
+        if ( isset( $settings['override_validation_summary'] ) && $settings['override_validation_summary'] === 'yes' ) {
+            $form['validationSummary'] = isset( $settings['validation_summary_override'] ) && $settings['validation_summary_override'] === 'yes';
         }
 
         // Apply animation override
-        if ( $settings['override_animation'] === 'yes' ) {
-            $form['enableAnimation'] = $settings['animation_override'] === 'yes';
+        if ( isset( $settings['override_animation'] ) && $settings['override_animation'] === 'yes' ) {
+            $form['enableAnimation'] = isset( $settings['animation_override'] ) && $settings['animation_override'] === 'yes';
         }
 
         return $form;
@@ -2612,6 +2750,10 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
             if ( $settings['override_animation'] === 'yes' ) {
                 $classes[] = 'gf-widget-override-animation';
             }
+        }
+
+        if ( isset( $settings['override_submit_layout'] ) && $settings['override_submit_layout'] === 'yes' ) {
+            $classes[] = 'gf-widget-override-submit-layout';
         }
 
         return implode( ' ', $classes );
@@ -2730,6 +2872,19 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if ( isset( $settings['override_submit_layout'] ) && $settings['override_submit_layout'] === 'yes' && \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
+            <div class="gf-widget-override-notice" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 12px;">
+                <strong><?php esc_html_e( 'Submit Button Layout Override Active:', 'elementor-addon' ); ?></strong><br>
+                <?php if ( isset( $settings['submit_position_override'] ) && $settings['submit_position_override'] === 'inline' ): ?>
+                    <?php esc_html_e( 'The button is rendered inline with the form fields instead of in the Gravity Forms footer.', 'elementor-addon' ); ?>
+                <?php elseif ( isset( $settings['submit_position_override'] ) && $settings['submit_position_override'] === 'bottom' ): ?>
+                    <?php esc_html_e( 'The button is rendered in the Gravity Forms footer instead of inline with the form fields.', 'elementor-addon' ); ?>
+                <?php else: ?>
+                    <?php esc_html_e( 'Gravity Forms keeps its selected button position; configured width and alignment still override its styles for this widget.', 'elementor-addon' ); ?>
+                <?php endif; ?>
+            </div>
         <?php endif; ?>
 
 <div class="gf-widget <?php echo esc_attr( $consent_use_custom_checkbox ); ?> <?php echo esc_attr( $checkbox_use_custom_checkbox ); ?> <?php echo esc_attr( $radio_use_custom_radio ); ?> <?php echo esc_attr( $show_fieldset ); ?> <?php echo esc_attr( $override_classes ); ?>" data-label-placement="<?php echo esc_attr( $label_placement ); ?>">
