@@ -8,6 +8,7 @@ namespace Elementor {
     if (!class_exists('Widget_Base')) {
         class Widget_Base {
             protected $settings = [];
+            protected $registered_controls = [];
             
             public function __construct($data = [], $args = null) {
                 // Mock constructor
@@ -30,7 +31,21 @@ namespace Elementor {
             }
             
             public function add_control($id, $args) {
-                // Mock method
+                $this->registered_controls[$id] = $args;
+            }
+
+            public function add_responsive_control($id, $args) {
+                $this->registered_controls[$id] = $args;
+            }
+
+            public function add_group_control($type, $args) {
+                if (isset($args['name'])) {
+                    $this->registered_controls[$args['name']] = $args;
+                }
+            }
+
+            public function get_registered_controls() {
+                return $this->registered_controls;
             }
         }
     }
@@ -44,6 +59,23 @@ namespace Elementor {
             const SWITCHER = 'switcher';
             const DIMENSIONS = 'dimensions';
             const RAW_HTML = 'raw_html';
+            const COLOR = 'color';
+        }
+    }
+
+    if (!class_exists('Group_Control_Border')) {
+        class Group_Control_Border {
+            public static function get_type() {
+                return 'border';
+            }
+        }
+    }
+
+    if (!class_exists('Group_Control_Typography')) {
+        class Group_Control_Typography {
+            public static function get_type() {
+                return 'typography';
+            }
         }
     }
     

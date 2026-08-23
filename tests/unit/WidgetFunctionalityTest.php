@@ -218,7 +218,8 @@ class WidgetFunctionalityTest extends TestCase {
         $methods = [
             'register_main_controls',
             'register_form_settings_controls',
-            'register_advanced_form_settings_controls'
+            'register_advanced_form_settings_controls',
+            'register_label_controls'
         ];
         
         foreach ($methods as $method) {
@@ -227,6 +228,35 @@ class WidgetFunctionalityTest extends TestCase {
                 "Method {$method} should exist"
             );
         }
+    }
+
+    /**
+     * Test that labels expose the same visual controls as other form elements.
+     */
+    public function test_label_style_controls() {
+        $reflection = new \ReflectionClass($this->widget);
+        $method = $reflection->getMethod('register_label_controls');
+        $method->setAccessible(true);
+        $method->invoke($this->widget);
+
+        $controls = $this->widget->get_registered_controls();
+
+        foreach ([
+            'label_margin',
+            'label_padding',
+            'label_border',
+            'label_border_radius',
+            'label_typography',
+            'label_text_color',
+            'label_background_color'
+        ] as $control) {
+            $this->assertArrayHasKey($control, $controls);
+        }
+
+        $selector = '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)';
+        $this->assertArrayHasKey($selector, $controls['label_padding']['selectors']);
+        $this->assertEquals($selector, $controls['label_border']['selector']);
+        $this->assertEquals($selector, $controls['label_typography']['selector']);
     }
 
     /**

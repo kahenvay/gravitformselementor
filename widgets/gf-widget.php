@@ -396,31 +396,6 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-        $this->add_control(
-			'label_margin',
-			[
-				'label' => esc_html__( 'Label Margin', 'elementor-addon' ),
-				'type' => \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-				'default' => [
-					'top' => 0,
-					'right' => 0,
-					'bottom' => 14.4,
-					'left' => 0,
-					'unit' => 'px',
-					'isLinked' => false,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .gform_wrapper label:not(.gform-field-label--type-inline)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-                'condition' => [
-                    'inherit_form_settings' => 'yes',
-                    'override_label_display' => 'yes',
-                    'label_display!' => 'none',
-                ],
-			]
-		);
-
         // Sub-Label Display Override
         $this->add_control(
             'override_sublabel_display',
@@ -662,6 +637,124 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
                 'condition' => [
                     // 'inherit_form_settings' => 'yes',
                     'override_animation' => 'yes',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    /**
+     * Register visual styling controls for primary field labels.
+     *
+     * Label placement and display remain form-structure settings above. These
+     * controls only change the presentation of a form's primary field labels.
+     */
+    protected function register_label_controls(){
+        $this->start_controls_section(
+            'label_section',
+            [
+                'label' => esc_html__( 'Labels Styling', 'textdomain' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'label_margin',
+            [
+                'label' => esc_html__( 'Label Margin', 'elementor-addon' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => 0,
+                    'right' => 0,
+                    'bottom' => 14.4,
+                    'left' => 0,
+                    'unit' => 'px',
+                    'isLinked' => false,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'label_padding',
+            [
+                'label' => esc_html__( 'Label Padding', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => 0,
+                    'right' => 0,
+                    'bottom' => 0,
+                    'left' => 0,
+                    'unit' => 'px',
+                    'isLinked' => false,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'label_border',
+                'separator' => 'before',
+                'selector' => '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'label_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => 0,
+                    'right' => 0,
+                    'bottom' => 0,
+                    'left' => 0,
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'label_typography',
+                'selector' => '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)',
+            ]
+        );
+
+        $this->add_control(
+            'label_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'label_background_color',
+            [
+                'label' => esc_html__( 'Background Color', 'elementor-pro' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .gform_wrapper .gfield_label:not(.gfield_consent_label)' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -2350,6 +2443,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		$this->register_main_controls();
         $this->register_form_settings_controls();
         $this->register_advanced_form_settings_controls();
+        $this->register_label_controls();
         $this->register_input_controls();
         $this->register_emails_controls();
         $this->register_name_controls();
