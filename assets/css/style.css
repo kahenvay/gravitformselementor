@@ -311,6 +311,10 @@
   }
 }
 
+.gf-widget .gform_wrapper fieldset {
+  padding: var(--gf-fieldset-padding, 0);
+}
+
 /* Enforce the hidden default against theme styles; the Show switch removes this rule. */
 .gf-widget.hide_fieldsets .gform_wrapper fieldset {
   border: var(--gf-fieldset-border, none) !important;
