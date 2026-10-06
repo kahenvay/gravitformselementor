@@ -64,7 +64,17 @@ The widget provides extensive styling controls for:
 - **Submit Button**: Full styling control
 - **Sections**: Style section headers and dividers
 - **Consent Fields**: Special styling for consent checkboxes
-- **Fieldsets**: Show/hide fieldset borders
+- **Fieldsets**: Borders hidden by default; enable **Content → Gravity Form → Show Fieldset Borders** to customize style, width, color, and radius. Explicitly enabled borders remain enabled.
+
+To change the default fieldset border in code, set this CSS variable in your custom stylesheet (scope the selector to a specific widget if needed):
+
+```css
+.gf-widget {
+  --gf-fieldset-border: 1px solid #ccc;
+}
+```
+
+The variable defaults to `none` and applies while **Show Fieldset Borders** is off. Turning the switch on lets the existing Elementor border controls apply instead.
 
 ## Understanding Label Controls
 

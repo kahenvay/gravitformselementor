@@ -2500,6 +2500,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			'show_fieldset',
 			[
 				'label' => esc_html__( 'Show Fieldset Borders', 'textdomain' ),
+				'description' => esc_html__( 'Borders are hidden by default. Enable to customize their style, width, color, and radius.', 'textdomain' ),
 				'type' => \Elementor\Controls_Manager::SWITCHER,
 				'label_on' => esc_html__( 'Show', 'textdomain' ),
 				'label_off' => esc_html__( 'Hide', 'textdomain' ),
@@ -2809,7 +2810,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 		$consent_use_custom_checkbox = $settings['consent_use_custom_checkbox'] == 'yes' ? 'consent_gf_use_custom_checkbox' : '';
 		$checkbox_use_custom_checkbox = $settings['checkbox_use_custom_checkbox'] == 'yes' ? 'checkbox_gf_use_custom_checkbox' : '';
 		$radio_use_custom_radio = $settings['radio_use_custom_radio'] == 'yes' ? 'radio_gf_use_custom_radio' : '';
-        $show_fieldset = $settings['show_fieldset'] == 'yes' ? '' : 'hide_fieldsets';
+        $show_fieldset = ( $settings['show_fieldset'] ?? 'no' ) === 'yes' ? '' : 'hide_fieldsets';
 
         // Get override classes
         $override_classes = $this->get_form_override_classes( $settings );

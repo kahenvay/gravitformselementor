@@ -254,10 +254,11 @@
   font-size: 15px;
 }
 
-.hide_fieldsets fieldset{
-  border: none;
-    display: block;
-    margin: 0;
+/* Enforce the hidden default against theme styles; the Show switch removes this rule. */
+.gf-widget.hide_fieldsets .gform_wrapper fieldset {
+  border: var(--gf-fieldset-border, none) !important;
+  display: block;
+  margin: 0;
 }
 
 /* Error message styling */
