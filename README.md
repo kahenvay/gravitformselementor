@@ -77,7 +77,7 @@ To change the default fieldset border in code, set this CSS variable in your cus
 
 The variable defaults to `none` and applies while **Show Fieldset Borders** is off. Turning the switch on lets the existing Elementor border controls apply instead.
 
-Fieldset padding defaults to `0`, whether borders are shown or hidden. Set `--gf-fieldset-padding` on `.gf-widget` to change it in code (for example, `--gf-fieldset-padding: 12px;`). Existing Elementor checkbox and radio field padding controls can still override this default.
+Fieldset padding defaults to `0`, whether borders are shown or hidden. **Style → Names Styling → Fieldset Padding** controls the space around the Name inputs and labels, with responsive overrides; **Input Padding** controls the space inside the text inputs. Checkbox and radio field padding controls also override the fieldset default. To change the fallback in code, set `--gf-fieldset-padding` on `.gf-widget` (for example, `--gf-fieldset-padding: 12px;`); field-specific controls take precedence.
 
 ## Understanding Label Controls
 

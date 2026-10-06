@@ -312,7 +312,8 @@
 }
 
 .gf-widget .gform_wrapper fieldset {
-  padding: var(--gf-fieldset-padding, 0);
+  /* Theme rules can add padding; explicit widget controls override the variable. */
+  padding: var(--gf-fieldset-padding, 0) !important;
 }
 
 /* Enforce the hidden default against theme styles; the Show switch removes this rule. */
