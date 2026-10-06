@@ -254,6 +254,62 @@
   font-size: 15px;
 }
 
+/* Draw on the native select itself so the arrow follows its width and cannot intercept clicks. */
+.gf-widget .gform_wrapper .ginput_container_select select:not([multiple]) {
+  --gf-select-arrow-size: 14px;
+  --gf-select-arrow-thickness: 2px;
+  --gf-select-arrow-inset: 16px;
+  --gf-select-arrow-offset-y: 0px;
+  --gf-select-padding-end: var(--gf-select-padding-right, 32px);
+  -webkit-appearance: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg,
+      transparent calc(50% - var(--gf-select-arrow-thickness) / 2),
+      var(--gf-select-arrow-color, currentColor) calc(50% - var(--gf-select-arrow-thickness) / 2),
+      var(--gf-select-arrow-color, currentColor) calc(50% + var(--gf-select-arrow-thickness) / 2),
+      transparent calc(50% + var(--gf-select-arrow-thickness) / 2)),
+    linear-gradient(135deg,
+      transparent calc(50% - var(--gf-select-arrow-thickness) / 2),
+      var(--gf-select-arrow-color, currentColor) calc(50% - var(--gf-select-arrow-thickness) / 2),
+      var(--gf-select-arrow-color, currentColor) calc(50% + var(--gf-select-arrow-thickness) / 2),
+      transparent calc(50% + var(--gf-select-arrow-thickness) / 2));
+  background-position:
+    right calc(var(--gf-select-arrow-inset) + var(--gf-select-arrow-size) / 2) top calc(50% + var(--gf-select-arrow-offset-y)),
+    right var(--gf-select-arrow-inset) top calc(50% + var(--gf-select-arrow-offset-y));
+  background-size: calc(var(--gf-select-arrow-size) / 2) calc(var(--gf-select-arrow-size) / 2);
+  background-repeat: no-repeat;
+  /* Reserve space even when the arrow is enlarged or moved further inward. */
+  padding-inline-end: max(var(--gf-select-padding-end), calc(var(--gf-select-arrow-inset) + var(--gf-select-arrow-size) + 12px)) !important;
+}
+
+[dir="rtl"] .gf-widget .gform_wrapper .ginput_container_select select:not([multiple]),
+.gf-widget .gform_wrapper.gf_rtl .ginput_container_select select:not([multiple]) {
+  --gf-select-padding-end: var(--gf-select-padding-left, 32px);
+  background-position:
+    left var(--gf-select-arrow-inset) top calc(50% + var(--gf-select-arrow-offset-y)),
+    left calc(var(--gf-select-arrow-inset) + var(--gf-select-arrow-size) / 2) top calc(50% + var(--gf-select-arrow-offset-y));
+}
+
+.gf-select-arrow-none .gform_wrapper .ginput_container_select select:not([multiple]) {
+  background-image: none;
+  padding-inline-end: var(--gf-select-padding-end) !important;
+}
+
+/* Background images can be suppressed in high-contrast mode; restore the system arrow. */
+@media (forced-colors: active) {
+  .gf-widget .gform_wrapper .ginput_container_select select:not([multiple]) {
+    -webkit-appearance: auto;
+    appearance: auto;
+    background-image: none;
+  }
+
+  .gf-select-arrow-none .gform_wrapper .ginput_container_select select:not([multiple]) {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
 /* Enforce the hidden default against theme styles; the Show switch removes this rule. */
 .gf-widget.hide_fieldsets .gform_wrapper fieldset {
   border: var(--gf-fieldset-border, none) !important;

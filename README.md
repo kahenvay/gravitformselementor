@@ -59,6 +59,7 @@ The plugin can inherit settings directly from your Gravity Forms:
 The widget provides extensive styling controls for:
 
 - **Inputs**: Padding, margins, borders, colors, typography
+- **Select Arrows**: Under **Style → Select Styling**, adjust arrow size, thickness, distance from the edge, vertical offset, and color. The default chevron is 14px wide with a 2px stroke, inset 16px, and inherits the select text color. Position and size controls support responsive overrides, and select padding grows as needed to keep text clear of the arrow. **Arrow Display → None** hides it. These controls apply to native single-select dropdowns; Gravity Forms Enhanced UI and multi-select lists keep their own presentation.
 - **Labels**: Position, display, margins, typography
 - **Checkboxes & Radio Buttons**: Custom styling with visual controls
 - **Submit Button**: Full styling control

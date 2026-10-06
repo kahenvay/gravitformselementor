@@ -1324,6 +1324,8 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
     }
 
 	protected function register_select_controls(){
+        $select_arrow_selector = '{{WRAPPER}} .gform_wrapper .ginput_container_select select:not([multiple])';
+
         $this->start_controls_section(
             'select_section',
             [
@@ -1338,18 +1340,80 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 			'arrow_display',
 			[
 				'label' => esc_html__( 'Arrow Display', 'textdomain' ),
+                'description' => esc_html__( 'Arrow controls apply to native single-select dropdowns. Gravity Forms Enhanced UI uses its own arrow.', 'textdomain' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'auto',
+                'prefix_class' => 'gf-select-arrow-',
                 'options' => [
                     'none' => esc_html__( 'None', 'elementor-pro' ),
                     'auto' => esc_html__( 'Auto', 'elementor-pro' ),
                 ],
                 'separator' => 'before',
-                'selectors' => [
-                    '{{WRAPPER}} .gform_wrapper select' => 'appearance: {{VALUE}};',
-                ],
 			]
 		);
+
+        foreach ([
+            'select_arrow_size' => [
+                'label' => esc_html__( 'Arrow Size', 'textdomain' ),
+                'property' => '--gf-select-arrow-size',
+                'default' => 14,
+                'min' => 8,
+                'max' => 40,
+            ],
+            'select_arrow_thickness' => [
+                'label' => esc_html__( 'Arrow Thickness', 'textdomain' ),
+                'property' => '--gf-select-arrow-thickness',
+                'default' => 2,
+                'min' => 1,
+                'max' => 5,
+            ],
+            'select_arrow_inset' => [
+                'label' => esc_html__( 'Arrow Distance from Edge', 'textdomain' ),
+                'property' => '--gf-select-arrow-inset',
+                'default' => 16,
+                'min' => 0,
+                'max' => 64,
+            ],
+            'select_arrow_offset_y' => [
+                'label' => esc_html__( 'Arrow Vertical Offset', 'textdomain' ),
+                'property' => '--gf-select-arrow-offset-y',
+                'default' => 0,
+                'min' => -24,
+                'max' => 24,
+            ],
+        ] as $control_name => $control) {
+            $this->add_responsive_control(
+                $control_name,
+                [
+                    'label' => $control['label'],
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'size_units' => [ 'px' ],
+                    'range' => [
+                        'px' => [
+                            'min' => $control['min'],
+                            'max' => $control['max'],
+                        ],
+                    ],
+                    'default' => [ 'size' => $control['default'], 'unit' => 'px' ],
+                    'selectors' => [
+                        $select_arrow_selector => $control['property'] . ': {{SIZE}}{{UNIT}};',
+                    ],
+                    'condition' => [ 'arrow_display!' => 'none' ],
+                ]
+            );
+        }
+
+        $this->add_control(
+            'select_arrow_color',
+            [
+                'label' => esc_html__( 'Arrow Color', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    $select_arrow_selector => '--gf-select-arrow-color: {{VALUE}};',
+                ],
+                'condition' => [ 'arrow_display!' => 'none' ],
+            ]
+        );
 
         $this->add_control(
 			'selects_margin',
@@ -1386,7 +1450,7 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 					'isLinked' => false,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .gform_wrapper select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .gform_wrapper select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; --gf-select-padding-right: {{RIGHT}}{{UNIT}}; --gf-select-padding-left: {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1637,7 +1701,6 @@ class Elementor_GF_Widget extends \Elementor\Widget_Base {
 
 	// TODO : more options for syling
 	// replace checkbox for more customisation
-	// replace caret for more customisation
 
 
 	protected function register_consent_controls(){
